@@ -1,4 +1,1 @@
-#[allow(unused)]
-pub fn run() {
-    println!("Hello Arrays & Hashing")
-}
+pub mod contains_duplicate;
