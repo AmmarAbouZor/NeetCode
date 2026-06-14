@@ -19,5 +19,5 @@ pub fn contains_duplicates_idiomatic(nums: &[i32]) -> bool {
 
     let mut nums_set = HashSet::new();
 
-    nums.iter().any(|num| !nums_set.insert(*num)) 
+    nums.iter().any(|num| !nums_set.insert(*num))
 }
