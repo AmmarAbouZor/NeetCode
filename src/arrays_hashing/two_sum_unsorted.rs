@@ -6,7 +6,7 @@ pub fn two_sum(nums: Vec<i32>, target: i32) -> Vec<i32> {
 
     use std::collections::HashMap;
 
-	// Complement map
+    // Complement map
     let mut compl_map = HashMap::<i32, i32>::new();
 
     for (idx, num) in nums.iter().enumerate() {
@@ -14,7 +14,7 @@ pub fn two_sum(nums: Vec<i32>, target: i32) -> Vec<i32> {
             return vec![*first_idx, idx as i32];
         }
 
-		// Complement 
+        // Complement
         let comp = target - num;
 
         compl_map.insert(comp, idx as i32);
@@ -31,7 +31,7 @@ pub fn two_sum_my(nums: &[i32], target: i32) -> Option<(usize, usize)> {
 
     use std::collections::HashMap;
 
-	// Complement map
+    // Complement map
     let mut compl_map = HashMap::<i32, usize>::new();
 
     for (idx, num) in nums.iter().enumerate() {
@@ -39,7 +39,7 @@ pub fn two_sum_my(nums: &[i32], target: i32) -> Option<(usize, usize)> {
             return Some((*first_idx, idx));
         }
 
-		// Complement 
+        // Complement
         let comp = target - num;
 
         compl_map.insert(comp, idx);
