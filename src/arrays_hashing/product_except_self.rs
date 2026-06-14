@@ -1,4 +1,4 @@
-// O(N) Using prefix and suffix using the same result to store them without 
+// O(N) Using prefix and suffix using the same result to store them without
 // Storing them in extra vectors.
 // This will also avoid using division.
 pub fn product_except_self(nums: Vec<i32>) -> Vec<i32> {
@@ -18,7 +18,6 @@ pub fn product_except_self(nums: Vec<i32>) -> Vec<i32> {
 
     res
 }
-
 
 // O(N) Using prefix and suffix in case divide isn't allowed
 // This will allocate two vectors for prefix and suffix.
@@ -49,7 +48,6 @@ pub fn product_except_self_extra_vecs(nums: Vec<i32>) -> Vec<i32> {
 
     res
 }
-
 
 // O(N) with division. It's simple but it may be not enough for the interview.
 pub fn product_except_self_with_division(nums: Vec<i32>) -> Vec<i32> {
