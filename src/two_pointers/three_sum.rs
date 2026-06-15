@@ -47,7 +47,7 @@ pub fn three_sum(nums: Vec<i32>) -> Vec<Vec<i32>> {
     res
 }
 
-// This solution allocate space for HashSet for duplicates and also 
+// This solution allocate space for HashSet for duplicates and also
 // nesting two_sums making it allocate vec for its results as well.
 pub fn three_sum_with_set(nums: Vec<i32>) -> Vec<Vec<i32>> {
     let mut nums = nums;
