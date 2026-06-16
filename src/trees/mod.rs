@@ -8,3 +8,4 @@ pub mod max_depth;
 pub mod right_side_view;
 pub mod same_tree;
 pub mod subtree_of_another;
+pub mod valid_bst;
