@@ -2,6 +2,7 @@ pub mod balanced_tree;
 pub mod count_good_nodes;
 pub mod diameter_tree;
 pub mod invert_binary;
+pub mod kth_smallest_integer;
 pub mod level_order_traversal;
 pub mod lowest_common_ancestor;
 pub mod max_depth;
