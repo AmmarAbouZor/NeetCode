@@ -1,4 +1,5 @@
 pub mod cycle_detection;
+pub mod find_duplicate;
 pub mod merge_two_sorted;
 pub mod reorder_list;
 pub mod reverse_linked;
