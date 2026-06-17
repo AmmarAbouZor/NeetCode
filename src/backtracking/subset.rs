@@ -24,6 +24,20 @@ fn dfs(nums: &[i32], idx: usize, subset: &mut Vec<i32>, res: &mut Vec<Vec<i32>>)
     dfs(nums, idx + 1, subset, res);
 }
 
+// Resolve dfs with loop:
+// At every DFS call, the current subset is already valid, so save it immediately.
+// Then try adding each later element.
+#[allow(unused)]
+fn dfs_loop(nums: &[i32], idx: usize, subset: &mut Vec<i32>, res: &mut Vec<Vec<i32>>) {
+    res.push(subset.clone());
+
+    for j in idx..nums.len() {
+        subset.push(nums[j]);
+        dfs_loop(nums, j + 1, subset, res);
+        subset.pop();
+    }
+}
+
 // Iterative subset expansion,
 // Time: O(n * 2^n)
 // Extra space: O(n), for recursion stack and current subset.
