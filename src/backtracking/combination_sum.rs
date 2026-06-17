@@ -1,45 +1,20 @@
-//NOTE: Optimized Solution is below
+// Combinations DFS with sorting:
 
-// Combination DFS
-// Time: O(2^(T/m)) as a loose bound for the search tree, where T is target
-// and m is the smallest candidate. Cloning results adds output cost.
-// Extra space: O(T/m) for recursion stack and current combination, excluding output.
-// Output space: O(k * T/m), where k is the number of valid combinations.
-
-// Combination with DFS to avoid dulicate permutations:
-// - One branch choosing to keep including an item
-// - Other branch to stop including the items and move to next item.
-
-pub fn combination_sum(nums: Vec<i32>, target: i32) -> Vec<Vec<i32>> {
-    let mut res = Vec::new();
-    dfs(&nums, target, 0, &mut Vec::new(), 0, &mut res);
-
-    res
-}
-
-fn dfs(
-    nums: &[i32],
-    target: i32,
-    idx: usize,
-    cur: &mut Vec<i32>,
-    total: i32,
-    res: &mut Vec<Vec<i32>>,
-) {
-    if target == total {
-        res.push(cur.clone());
-        return;
-    }
-
-    if idx >= nums.len() || total > target {
-        return;
-    }
-
-    cur.push(nums[idx]);
-    dfs(nums, target, idx, cur, total + nums[idx], res);
-
-    cur.pop();
-    dfs(nums, target, idx + 1, cur, total, res);
-}
+// === Pattern ===
+// sort
+// dfs(start, remaining, current)
+// for i in start..nums.len() {
+//     if nums[i] > remaining {
+//         break;
+//     }
+//
+//     choose nums[i]
+//
+//     dfs(i, remaining - nums[i], current)
+//     // use i, not i + 1, because reuse is allowed
+//
+//     undo choice
+// }
 
 // Sorting lets us stop the loop once total + nums[j] exceeds target.
 // Passing j into the recursive call allows reusing the same candidate while
@@ -83,4 +58,45 @@ pub fn dfs_opt(
         dfs_opt(nums, target, j, cur, total + nums[j], res);
         cur.pop();
     }
+}
+
+// Combination DFS
+// Time: O(2^(T/m)) as a loose bound for the search tree, where T is target
+// and m is the smallest candidate. Cloning results adds output cost.
+// Extra space: O(T/m) for recursion stack and current combination, excluding output.
+// Output space: O(k * T/m), where k is the number of valid combinations.
+
+// Combination with DFS to avoid dulicate permutations:
+// - One branch choosing to keep including an item
+// - Other branch to stop including the items and move to next item.
+
+pub fn combination_sum(nums: Vec<i32>, target: i32) -> Vec<Vec<i32>> {
+    let mut res = Vec::new();
+    dfs(&nums, target, 0, &mut Vec::new(), 0, &mut res);
+
+    res
+}
+
+fn dfs(
+    nums: &[i32],
+    target: i32,
+    idx: usize,
+    cur: &mut Vec<i32>,
+    total: i32,
+    res: &mut Vec<Vec<i32>>,
+) {
+    if target == total {
+        res.push(cur.clone());
+        return;
+    }
+
+    if idx >= nums.len() || total > target {
+        return;
+    }
+
+    cur.push(nums[idx]);
+    dfs(nums, target, idx, cur, total + nums[idx], res);
+
+    cur.pop();
+    dfs(nums, target, idx + 1, cur, total, res);
 }
