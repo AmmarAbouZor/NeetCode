@@ -40,9 +40,9 @@ fn dfs(
     }
 
     for j in idx..nums.len() {
-		// Skip duplicate sibling choices at this DFS level.
-		// Duplicates can still be used across deeper levels when they come from
-		// different indices, but this prevents generating the same combination twice.
+        // Skip duplicate sibling choices at this DFS level.
+        // Duplicates can still be used across deeper levels when they come from
+        // different indices, but this prevents generating the same combination twice.
         if j > idx && nums[j] == nums[j - 1] {
             continue;
         }
