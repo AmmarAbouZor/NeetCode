@@ -32,6 +32,24 @@ for i in start..nums.len() {
 }
 ```
 
+### Subsets II
+
+Same as subsets, but sort and skip duplicate sibling choices.
+
+```rust
+res.push(cur.clone());
+
+for i in start..nums.len() {
+    if i > start && nums[i] == nums[i - 1] {
+        continue;
+    }
+
+    cur.push(nums[i]);
+    dfs(i + 1, cur, res);
+    cur.pop();
+}
+```
+
 ### Combination Sum I
 
 ```rust
@@ -74,6 +92,30 @@ for i in start..nums.len() {
 }
 ```
 
+### Duplicate skipping
+
+After sorting, skip duplicate sibling choices at the same DFS level:
+
+```rust
+if i > start && nums[i] == nums[i - 1] {
+    continue;
+}
+```
+
+This avoids duplicate results while still allowing duplicate values from deeper levels.
+
+### Pruning with sorted positive numbers
+
+If input is sorted and values are positive:
+
+```rust
+if nums[i] > remaining {
+    break;
+}
+```
+
+Without sorting, use `continue`, not `break`, because later values may be smaller.
+
 ### Permutations
 
 Permutations are the exception because there is no `start`; every position can use any unused number.
@@ -93,3 +135,60 @@ for i in 0..nums.len() {
     used[i] = false;
 }
 ```
+
+### Generate Parentheses
+
+Build only valid prefixes.
+
+```rust
+if open < n {
+    cur.push('(');
+    dfs(open + 1, close, cur, res);
+    cur.pop();
+}
+
+if close < open {
+    cur.push(')');
+    dfs(open, close + 1, cur, res);
+    cur.pop();
+}
+```
+
+There are Catalan-number many valid outputs.
+
+### Word Search
+
+Grid backtracking pattern:
+
+```rust
+if out_of_bounds || visited[r][c] || board[r][c] != word[i] {
+    return false;
+}
+
+visited[r][c] = true;
+search neighbors;
+visited[r][c] = false;
+```
+
+Time is exponential in word length because DFS branches in directions.
+
+### Letter Combinations of Phone Number
+
+This is not a `for i in start..nums.len()` problem. Each recursion level handles exactly one digit.
+
+```rust
+for ch in digit_chars(digits[idx]) {
+    cur.push(ch);
+    dfs(idx + 1, cur, res);
+    cur.pop();
+}
+```
+
+### Backtracking Big-O notes
+
+- Subsets: `O(n * 2^n)`
+- Permutations: `O(n * n!)`
+- Combination Sum I: loose bound `O(2^(T/m))`, output can dominate
+- Combination Sum II: `O(n * 2^n)`
+- Generate Parentheses: `O(C_n * n)`
+- Word Search: `O(R * C * 4 * 3^(L - 1))`
