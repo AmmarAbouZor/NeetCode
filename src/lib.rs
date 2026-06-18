@@ -1,6 +1,7 @@
 pub mod arrays_hashing;
 pub mod backtracking;
 pub mod binary_search;
+pub mod graphs;
 pub mod heap;
 pub mod linked_list;
 pub mod sliding_window;
