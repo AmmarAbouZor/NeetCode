@@ -7,6 +7,7 @@ pub mod num_connected;
 pub mod num_connected_union;
 pub mod number_islands;
 pub mod pacific_atlantic;
+pub mod redundant_connection;
 pub mod rotten_fruit;
 pub mod surround_regions;
 pub mod valid_tree;
