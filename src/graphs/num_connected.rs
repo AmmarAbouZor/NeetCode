@@ -1,3 +1,5 @@
+// Problem is solved used union find in num_connected_union.rs
+
 // Using DFS is straightforward here:
 // * Create an adjacency list from undirected graph edges.
 // * Keep track of visited nodes.
