@@ -15,9 +15,9 @@ pub fn climb_stairs_dp_optmized(n: i32) -> i32 {
     let mut prev1 = 2;
     let mut prev2 = 1;
     for _ in 3..=n {
-        let temp = prev1;
-        prev1 = prev1 + prev2;
-        prev2 = temp;
+        let cur = prev1 + prev2;
+        prev2 = prev1;
+        prev1 = cur;
     }
 
     prev1
