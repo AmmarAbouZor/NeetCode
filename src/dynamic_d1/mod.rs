@@ -1,4 +1,5 @@
 pub mod climbing_stairs;
+pub mod decode_ways;
 pub mod house_robber;
 pub mod house_robber_2;
 pub mod longest_palindrome;
