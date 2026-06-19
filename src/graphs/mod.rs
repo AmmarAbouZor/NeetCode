@@ -1,5 +1,6 @@
 pub mod clone_graph;
 pub mod course_schedule;
+pub mod course_schedule_2;
 pub mod island_treasure;
 pub mod max_island;
 pub mod number_islands;
