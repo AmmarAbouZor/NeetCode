@@ -3,6 +3,7 @@ pub mod course_schedule;
 pub mod course_schedule_2;
 pub mod island_treasure;
 pub mod max_island;
+pub mod num_connected;
 pub mod number_islands;
 pub mod pacific_atlantic;
 pub mod rotten_fruit;
