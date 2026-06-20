@@ -4,6 +4,7 @@ pub mod binary_search;
 pub mod dynamic_d1;
 pub mod graphs;
 pub mod heap;
+pub mod intervals;
 pub mod linked_list;
 pub mod sliding_window;
 pub mod stack;
