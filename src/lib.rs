@@ -1,6 +1,7 @@
 pub mod arrays_hashing;
 pub mod backtracking;
 pub mod binary_search;
+pub mod bitwise;
 pub mod dynamic_d1;
 pub mod graphs;
 pub mod heap;
