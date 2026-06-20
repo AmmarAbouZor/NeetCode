@@ -31,6 +31,7 @@ pub fn jump(nums: Vec<i32>) -> i32 {
 }
 
 // Solution with checks for invalid and none-resolvable input.
+#[allow(clippy::needless_range_loop)]
 pub fn jump_with_validation(nums: Vec<i32>) -> i32 {
     match nums.len() {
         0 => return -1,
