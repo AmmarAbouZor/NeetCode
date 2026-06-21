@@ -60,6 +60,8 @@ Each index is pushed and popped at most once. Time: `O(n)`, space: `O(n)`.
 
 ## Car Fleet
 
+**Note**: Solution doesn't use a stack as we need to keep track on latest fleet only.
+
 Sort cars by position. Scan from closest to target backwards.
 
 Compute time to target:
