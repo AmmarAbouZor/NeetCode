@@ -59,6 +59,10 @@ Hours for a pile:
 
 This is integer ceiling division. Time: `O(n log m)`, where `m = max(piles)`. Space: `O(1)`.
 
+**Note:**
+The problem description feels like DP or greedy.
+However, it's a brute force as try every possible k which is made a binary search as our search range is 1..max_pile_count.
+
 ## Search 2D Matrix
 
 Treat matrix as flattened sorted array.

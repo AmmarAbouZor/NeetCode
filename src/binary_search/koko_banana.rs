@@ -1,3 +1,6 @@
+// Basically we need to find the first k value in range 1..max_k which is max pile length
+// To search in this ordered list we can apply binary search instead of the linear
+//
 // O(nlogm) where n is the input size, m is the maximum value in the array
 // * Getting max is O(n)
 // * Binary search is O(logm) and can_finish is O(n) making the loop O(nlogm).

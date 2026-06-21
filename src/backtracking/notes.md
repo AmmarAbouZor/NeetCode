@@ -78,6 +78,7 @@ if remaining == 0 {
 }
 
 for i in start..nums.len() {
+    // Skip duplicate sibling choices at same DFS level.
     if i > start && nums[i] == nums[i - 1] {
         continue;
     }

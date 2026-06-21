@@ -49,6 +49,12 @@ pub fn dfs_opt(
         return;
     }
 
+    // Defensive guard. With positive sorted candidates, totals above target
+    // cannot become valid by adding more numbers.
+    if total > target {
+        return;
+    }
+
     for j in idx..nums.len() {
         if total + nums[j] > target {
             return;

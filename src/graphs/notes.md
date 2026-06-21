@@ -272,7 +272,8 @@ if size[root1] > size[root2] {
 
 Only root sizes are meaningful. No need to reset the size of a node after it stops being a root.
 
-Time: `O((V + E) * α(V))`, effectively near linear. Space: `O(V)`.
+Time: `O((V + E) * α(V))` where alpha is the inverse Ackermann function, effectively near linear. 
+Space: `O(V)`.
 
 ## Components with Union Find
 
