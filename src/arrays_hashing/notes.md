@@ -44,6 +44,9 @@ Use character-count array as the group key:
 ```rust
 let mut counts = [0; 26];
 counts[(b - b'a') as usize] += 1;
+
+// Map
+HashMap<[usize; 26], Vec<String>>
 ```
 
 This avoids comparing each string against previous groups. Time: `O(n * L)`.
@@ -60,17 +63,21 @@ Bucket sort is best when frequencies are bounded by `nums.len()`.
 
 ## Product Except Self
 
-Use output vector for prefix products, then multiply suffix into it.
+Use separate prefix and suffix arrays, then multiply the values around each index.
 
 ```rust
-res[i] = prefix;
-prefix *= nums[i];
+prefix[i] = nums[0] * ... * nums[i];
+suffix[i] = nums[i] * ... * nums[n - 1];
 
-res[i] *= suffix;
-suffix *= nums[i];
+left = if i == 0 { 1 } else { prefix[i - 1] };
+right = suffix.get(i + 1).copied().unwrap_or(1);
+res[i] = left * right;
 ```
 
-No division needed. Time: `O(n)`, extra space excluding output: `O(1)`.
+No division needed. Time: `O(n)`, space: `O(n)` for prefix, suffix, and output.
+
+Note: It's still possible to calculate prefix and suffix directly in output array making
+Space `O(1)`.
 
 ## Longest Consecutive Sequence
 
@@ -96,7 +103,8 @@ Important iterator note: use `by_ref()` when consuming part of an iterator and c
 
 ## Valid Sudoku
 
-Track each row, column, and 3x3 square.
+We need to catch duplicates in each row, column and 3x3 square.
+It's possible to do it in one loop
 
 ```rust
 let square_idx = (r / 3) * 3 + c / 3;
