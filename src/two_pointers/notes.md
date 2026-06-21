@@ -66,6 +66,18 @@ Time: `O(n^2)`. Extra space excluding output: `O(1)`.
 
 Avoid using `HashSet` for duplicate triplets when sorted duplicate-skipping is enough.
 
+## Container With Most Water
+
+Start with pointers at both ends. Area is limited by the shorter height:
+
+```rust
+area = area.max(min(height[left], height[right]) * width);
+```
+
+Move the pointer with the smaller height. Moving the taller one cannot improve the limiting height while width shrinks.
+
+Time: `O(n)`, space: `O(1)`.
+
 ## Interview reminders
 
 - Confirm whether output is values or indices.
