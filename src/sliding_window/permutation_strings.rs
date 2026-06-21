@@ -1,3 +1,5 @@
+// Also here English lowercase chars is the indicator.
+//
 // Time O(N * 26) simplified O(N) one loop on the input with two sliding window
 // Space O(2 * 26) simplified as O(1)
 

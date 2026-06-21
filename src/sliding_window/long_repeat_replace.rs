@@ -1,3 +1,7 @@
+// Solution based on finding max count of any char in the window then check if
+// `window_len - max_char_count <= k` as window validation
+// If valid move with right, otherwise keep shifting left until it become valid again.
+//
 // Time O(N): Sliding window + O(26) in is_valid which is ignored as static
 // Space O(1) which is actually O(26).
 

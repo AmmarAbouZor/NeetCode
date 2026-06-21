@@ -52,6 +52,9 @@ Time: `O(n)`, space: `O(1)`.
 
 Sort first, then fix one value and run two-sum on the suffix.
 
+#### Note:
+We need to skip duplicates twice in code:
+
 Skip duplicate fixed values:
 
 ```rust
@@ -61,6 +64,8 @@ if i > 0 && nums[i] == nums[i - 1] {
 ```
 
 After finding a triplet, move both pointers and skip duplicate left/right values.
+
+#### Big O Notation
 
 Time: `O(n^2)`. Extra space excluding output: `O(1)`.
 

@@ -60,6 +60,8 @@ window_len - max_char_count <= k
 
 With `[0; 26]`, recomputing max is `O(26)`, so total time is `O(n)`.
 
+**Note:** Stating that chars are only English uppercase is an indicator to think about simpler algorithm before jumping into DP or greedy.
+
 Optimized version tracks `max_count`; it may become stale, but still works because it only delays shrinking and does not miss the best length.
 
 ## Permutation in String

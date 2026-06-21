@@ -1,6 +1,8 @@
 // O(n^2): time
 // * sorting is O(NLogN)
 // * two_sums is O(N) called from with loop in nums => O(N^2)
+//
+// Note: We need to check for duplicate in two places in code
 
 // Extra space: O(1), excluding the returned result
 // Output space: O(k), where k is number of triplets, worst-case O(n^2)
