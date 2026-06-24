@@ -1,4 +1,5 @@
 pub mod balanced_tree;
+pub mod construct_from_preorder_inorder;
 pub mod count_good_nodes;
 pub mod diameter_tree;
 pub mod invert_binary;

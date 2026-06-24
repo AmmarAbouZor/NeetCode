@@ -130,6 +130,35 @@ left -> node -> right
 
 Time: `O(h + k)`, worst case `O(n)`. Space: `O(h)`.
 
+## Construct Tree from Preorder and Inorder
+
+Preorder gives the root first. Inorder tells how to split left and right subtrees.
+
+```text
+preorder: root, left subtree, right subtree
+inorder:  left subtree, root, right subtree
+```
+
+Use a HashMap from value to inorder index to avoid searching every time.
+
+Keep one shared `pre_idx`:
+
+```rust
+let root_val = preorder[pre_idx];
+pre_idx += 1;
+```
+
+Each recursive call creates one node, so `pre_idx` only moves by one. The left recursion consumes all left-subtree preorder values before the right recursion starts.
+
+Use half-open inorder bounds `[l, r)` to avoid `usize` underflow:
+
+```rust
+left:  [l, mid)
+right: [mid + 1, r)
+```
+
+Time: `O(n)` with the map. Space: `O(n)` for the map/output and `O(h)` recursion stack.
+
 ## Lowest Common Ancestor in BST
 
 Use BST ordering:
