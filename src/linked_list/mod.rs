@@ -2,6 +2,7 @@ pub mod add_two_nums;
 pub mod copy_random;
 pub mod cycle_detection;
 pub mod find_duplicate;
+pub mod lru_cache;
 pub mod merge_two_sorted;
 pub mod remove_nth_node;
 pub mod reorder_list;
