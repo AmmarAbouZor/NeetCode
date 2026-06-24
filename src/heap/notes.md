@@ -87,3 +87,36 @@ Each cycle:
 Time: `O(N + T log A)`, where `T` is final schedule length and `A` is unique task types. For uppercase tasks, `A <= 26`, so this is effectively `O(N + T)`. Space: `O(A)`.
 
 For this exact LeetCode problem, a greedy formula also exists, but heap + queue is the general scheduler pattern.
+
+## Design Twitter
+
+Store per user:
+
+- set of followees
+- latest 10 tweets as `(timestamp, tweet_id)`
+
+Keeping only 10 tweets per user is safe because the feed only asks for 10 tweets. If a user has more than 10 tweets, older tweets cannot beat that same user's 10 newer tweets.
+
+For `get_news_feed`, scan:
+
+- current user's latest tweets
+- each followee's latest tweets
+
+Keep the 10 newest tweets in a min-heap:
+
+```rust
+heap.push(Reverse((timestamp, tweet_id)));
+if heap.len() > 10 {
+    heap.pop();
+}
+```
+
+Pop gives oldest-to-newest among the kept tweets, so reverse the result at the end.
+
+Time:
+
+- `post_tweet`: `O(1)`
+- `follow` / `unfollow`: `O(1)` average
+- `get_news_feed`: `O(f * 10 * log 10) = O(f)`, where `f` is number of followees
+
+Space: `O(u + e)`, where `u` is users and `e` is follow relationships. Feed call uses `O(10)` extra space.
