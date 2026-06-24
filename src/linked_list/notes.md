@@ -54,6 +54,94 @@ Fast/slow mutable pointer style is natural in C++, but awkward in safe Rust beca
 
 Extra pass is fine: still `O(n)` time and `O(1)` space.
 
+## Remove Nth Node From End
+
+Two-pass version is simple in Rust:
+
+1. count length
+2. convert `n` from end into index from front: `target = len - n`
+3. use a dummy node and stop at the node before `target`
+4. skip target with `next.take()`
+
+Dummy node handles removing the head cleanly.
+
+Time: `O(n)`, space: `O(1)`.
+
+## Add Two Numbers
+
+Do the addition digit by digit, like hand addition.
+
+State:
+
+```text
+add(l1, l2, carry)
+```
+
+Each step:
+
+```rust
+sum = val1 + val2 + carry
+node.val = sum % 10
+carry = sum / 10
+```
+
+Base case: both lists are empty and `carry == 0`.
+
+Do not convert the whole list into an integer; long inputs can overflow.
+
+Time: `O(max(n, m))`. Space: `O(max(n, m))` for output and recursion stack.
+
+## Copy List With Random Pointer
+
+Values are not guaranteed unique, so key by node identity, not value.
+
+Safe Rust approach with `Rc<RefCell<Node>>`:
+
+1. first pass: clone each node value and store original pointer -> copied node
+2. second pass: assign copied `next` and `random` using the map
+
+```rust
+map.insert(Rc::as_ptr(&node), copied);
+```
+
+Using `Rc::as_ptr` as a HashMap key is fine when it is only used as identity and not dereferenced.
+
+Time: `O(n)`, space: `O(n)`.
+
+## LRU Cache
+
+Expected interview design for `O(1)` get/put:
+
+```text
+HashMap<key, node>
+doubly linked list ordered by recency
+```
+
+In Rust, a safe approach is an arena-style linked list:
+
+```rust
+Vec<Entry>
+HashMap<i32, usize>
+Entry { key, value, prev: Option<usize>, next: Option<usize> }
+```
+
+Keep:
+
+- `head` = least recently used
+- `tail` = most recently used
+
+On `get` or updating existing key, move the node to `tail`.
+
+On insert when full, evict `head`.
+
+Core helpers:
+
+- `detach(idx)`: link previous and next around the node
+- `push_back(idx)`: attach node as most recent
+- `evict_lru()`: detach `head` and remove its key from the map
+
+Time: `O(1)` average per operation. Space: `O(capacity)`.
+
 ## Counting list length
 
 Nice immutable traversal:
