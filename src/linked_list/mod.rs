@@ -1,3 +1,4 @@
+pub mod add_two_nums;
 pub mod copy_random;
 pub mod cycle_detection;
 pub mod find_duplicate;
