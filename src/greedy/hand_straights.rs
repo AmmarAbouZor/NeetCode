@@ -13,10 +13,17 @@
 // Time: O(n log u), where n = hand.len() and u = number of unique cards.
 // Space: O(u).
 
+// This is simpler to follow in the interviews.
+#[allow(clippy::manual_is_multiple_of)]
 pub fn is_n_straight_hand(hand: Vec<i32>, group_size: i32) -> bool {
     if hand.len() % group_size as usize != 0 {
         return false;
     }
+
+    // Alternative to modulo operator
+    // if !hand.len().is_multiple_of(group_size as usize) {
+    //     return false;
+    // }
 
     let mut counts = std::collections::BTreeMap::new();
 
