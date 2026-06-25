@@ -8,4 +8,5 @@ pub mod longest_palindrome;
 pub mod max_product_sub;
 pub mod min_cost_climb_stair;
 pub mod palindromic_substring;
+pub mod part_eq_subset_sum;
 pub mod word_break;
