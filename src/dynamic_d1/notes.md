@@ -221,6 +221,114 @@ Return `-1` if `dp[amount]` is still impossible.
 
 Time: `O(amount * c)`, where `c = coins.len()`. Space: `O(amount)`.
 
+## Maximum Product Subarray
+
+Kadane-style DP, but track both max and min product ending at current index.
+
+State:
+
+```text
+cur_max = maximum product subarray ending here
+cur_min = minimum product subarray ending here
+```
+
+Keep `cur_min` because a negative number can turn the smallest product into the largest product.
+
+Candidate version:
+
+```rust
+candidates = [num, cur_max * num, cur_min * num]
+cur_max = max(candidates)
+cur_min = min(candidates)
+```
+
+Swap version:
+
+```rust
+if num < 0 {
+    swap(cur_min, cur_max);
+}
+cur_max = max(num, cur_max * num);
+cur_min = min(num, cur_min * num);
+```
+
+Zero resets the running product naturally because `num` itself is always a candidate.
+
+Time: `O(n)`. Space: `O(1)`.
+
+## Word Break
+
+DP over prefixes.
+
+State:
+
+```text
+dp[i] = true if s[0..i] can be segmented into dictionary words
+```
+
+For each end index `i`, try every split point `j`:
+
+```rust
+if dp[j] && words.contains(&s[j..i]) {
+    dp[i] = true;
+}
+```
+
+`dp[j]` means the prefix before `j` is valid. `s[j..i]` must be one dictionary word.
+
+Base:
+
+```text
+dp[0] = true
+```
+
+The empty prefix is valid and lets the first word start at index `0`.
+
+Let `n = s.len()` and `k = total chars in word_dict`.
+
+Time: `O(k + n^3)` worst case, because there are `O(n^2)` splits and substring lookup hashes up to `O(n)` chars. Space: `O(k + n)`.
+
+## Partition Equal Subset Sum
+
+0/1 knapsack as a yes/no question.
+
+If total sum is odd, equal partition is impossible. Otherwise target is:
+
+```text
+target = total / 2
+```
+
+State:
+
+```text
+dp[sum] = true if we can build sum using numbers processed so far
+```
+
+Base:
+
+```text
+dp[0] = true
+```
+
+For each `num`:
+
+```rust
+for sum in (num..=target).rev() {
+    dp[sum] |= dp[sum - num];
+}
+```
+
+Iterate backward so each number is used at most once.
+
+Example if `num = 2` and we iterate forward:
+
+- `dp[2]` becomes true from `dp[0]`
+- then `dp[4]` becomes true from `dp[2]`
+
+That incorrectly uses the same `2` twice in one pass. Backward iteration keeps `dp[sum - num]` from the previous state.
+
+Time: `O(n * target)`, where `target = sum(nums) / 2`. Space: `O(target)`.
+
 ## Longest Increasing Subsequence
 
 Simple DP state:
