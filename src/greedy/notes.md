@@ -96,3 +96,106 @@ start = i + 1;
 Why skip the middle stations: starting in the middle loses the nonnegative gas accumulated before it, so it cannot do better than the failed start.
 
 Time: `O(n)`. Space: `O(1)`.
+
+## Hand of Straights
+
+Always start from the smallest remaining card.
+
+That card cannot be placed later in another group because there is no smaller remaining card to start that group. So it must start:
+
+```text
+first, first + 1, ..., first + group_size - 1
+```
+
+Use a `BTreeMap` for sorted counts:
+
+```rust
+while !counts.is_empty() {
+    let first = *counts.keys().next().unwrap();
+    for card in first..first + group_size {
+        decrement count[card]
+    }
+}
+```
+
+If any needed card is missing, return `false`.
+
+Time: `O(n log u)`, where `u` is number of unique cards. Space: `O(u)`.
+
+## Merge Triplets to Form Target
+
+Merge uses max per position, so any triplet with a value greater than target is unusable.
+
+```rust
+if triplet[i] > target[i] {
+    skip triplet;
+}
+```
+
+For valid triplets, track whether each target position can be matched:
+
+```rust
+matches[i] |= triplet[i] == target[i];
+```
+
+If all three positions are matched by valid triplets, merging them can form the target.
+
+Time: `O(n)`. Space: `O(1)`.
+
+## Partition Labels
+
+First record the last position of each character.
+
+Then scan and keep extending the current partition end:
+
+```rust
+end = end.max(last_pos[ch]);
+```
+
+When current index reaches `end`, every character seen in this partition ends inside it, so the partition is complete.
+
+```rust
+if idx == end {
+    res.push(end - start + 1);
+    start = idx + 1;
+}
+```
+
+Time: `O(n)`. Space: `O(26) = O(1)`.
+
+## Valid Parenthesis String
+
+Do not choose what `'*'` means immediately. Track a range of possible unmatched opens.
+
+```text
+left_min = smallest possible unmatched '('
+left_max = largest possible unmatched '('
+```
+
+Updates:
+
+- `'('`: both increase
+- `')'`: both decrease
+- `'*'`: `left_min -= 1`, `left_max += 1`
+
+For `'*'`:
+
+- as `')'`, it can reduce unmatched opens
+- as `'('`, it can increase unmatched opens
+- as empty, it stays inside the range
+
+If `left_max < 0`, every interpretation has too many `')'`.
+
+Clamp `left_min` to zero because unmatched opens cannot be negative:
+
+```rust
+left_min = left_min.max(0);
+```
+
+At the end, valid if zero unmatched opens is possible:
+
+```rust
+left_min == 0
+```
+
+Time: `O(n)`. Space: `O(1)`.
