@@ -5,3 +5,4 @@ pub mod jump_game_2;
 pub mod max_sub_array;
 pub mod merge_triplets;
 pub mod part_labels;
+pub mod valid_parenth_string;
