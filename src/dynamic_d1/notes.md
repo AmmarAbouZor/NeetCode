@@ -331,19 +331,21 @@ Time: `O(n * target)`, where `target = sum(nums) / 2`. Space: `O(target)`.
 
 ## Longest Increasing Subsequence
 
-Simple DP state:
+Default DP state:
 
 ```text
-lis[i] = length of longest increasing subsequence starting at index i
+lis[i] = length of longest increasing subsequence ending at index i
 ```
 
-Iterate from right to left so all `lis[j]` for `j > i` are already known.
+Iterate left to right. For each `i`, check previous indices `j < i`.
+
+If `nums[j] < nums[i]`, then `nums[i]` can extend the subsequence ending at `j`:
 
 ```rust
-for i in (0..n).rev() {
+for i in 0..n {
     let mut best = 1;
-    for j in i + 1..n {
-        if nums[i] < nums[j] {
+    for j in 0..i {
+        if nums[j] < nums[i] {
             best = best.max(lis[j] + 1);
         }
     }
@@ -351,7 +353,15 @@ for i in (0..n).rev() {
 }
 ```
 
-The answer is `max(lis)` because the subsequence can start at any index.
+The answer is `max(lis)` because the subsequence can end at any index.
+
+Reverse direction also works with:
+
+```text
+lis[i] = length of longest increasing subsequence starting at index i
+```
+
+Then iterate from right to left and look at `j > i`.
 
 Time: `O(n^2)`. Space: `O(n)`.
 
