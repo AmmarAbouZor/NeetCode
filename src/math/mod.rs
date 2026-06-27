@@ -2,6 +2,7 @@
 #![allow(clippy::needless_range_loop)]
 
 pub mod happy_number;
+pub mod multiply_strings;
 pub mod plus_one;
 pub mod pow;
 pub mod rotate_image;
