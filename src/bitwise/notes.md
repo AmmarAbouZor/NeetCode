@@ -105,12 +105,49 @@ Time: `O(n)`. Space: `O(1)`.
 
 ## Sum of Two Integers
 
-Concept only, if it comes up:
+Binary addition without `+` uses two operations:
 
 ```text
 sum without carry = a ^ b
 carry = (a & b) << 1
-repeat until carry is 0
 ```
 
-This is lower priority in Rust because signed overflow details make the implementation noisy.
+Repeat until carry is `0`:
+
+```rust
+while b != 0 {
+    let sum_no_carry = a ^ b;
+    let carry = (a & b) << 1;
+    a = sum_no_carry;
+    b = carry;
+}
+```
+
+Time: `O(32) = O(1)`. Space: `O(1)`.
+
+## Reverse Integer
+
+Take digits from the end of `x` and append them to the result.
+
+```rust
+let digit = x % 10;
+x /= 10;
+res = res * 10 + digit;
+```
+
+Use checked arithmetic because reversing can overflow `i32`:
+
+```rust
+res.checked_mul(10).and_then(|r| r.checked_add(digit))
+```
+
+Rust keeps the sign for `%`, so negative numbers work with the same logic:
+
+```text
+-123 % 10 = -3
+-123 / 10 = -12
+```
+
+Return `0` on overflow.
+
+Time: `O(1)` because `i32` has a fixed number of digits. Space: `O(1)`.
