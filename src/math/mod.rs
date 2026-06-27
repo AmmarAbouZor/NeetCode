@@ -2,6 +2,7 @@
 #![allow(clippy::needless_range_loop)]
 
 pub mod happy_number;
+pub mod plus_one;
 pub mod rotate_image;
 pub mod set_matrix_zeroes;
 pub mod spiral_matrix;
