@@ -9,6 +9,7 @@ pub mod greedy;
 pub mod heap;
 pub mod intervals;
 pub mod linked_list;
+pub mod math;
 pub mod sliding_window;
 pub mod stack;
 pub mod trees;
