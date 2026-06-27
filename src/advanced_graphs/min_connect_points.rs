@@ -29,7 +29,7 @@ pub fn min_cost_connect_points(points: Vec<Vec<i32>>) -> i32 {
         let mut next = None;
 
         for i in 0..n {
-            if !visited[i] && next.map_or(true, |j| min_dist[i] < min_dist[j]) {
+            if !visited[i] && next.is_none_or(|j| min_dist[i] < min_dist[j]) {
                 next = Some(i);
             }
         }
