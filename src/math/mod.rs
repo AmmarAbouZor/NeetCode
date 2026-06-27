@@ -2,4 +2,5 @@
 #![allow(clippy::needless_range_loop)]
 
 pub mod rotate_image;
+pub mod set_matrix_zeroes;
 pub mod spiral_matrix;
