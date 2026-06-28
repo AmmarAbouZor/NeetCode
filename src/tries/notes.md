@@ -108,6 +108,20 @@ Complexity:
 - worst case: `O(T)` because search may visit every trie node
 - loose bound: `O(A^D * L)`, where `A` is max branching factor and `D` is wildcard count
 
+## Word Search II
+
+Use backtracking with a trie.
+
+Build one trie for all words, then DFS from each board cell. Stop early when the current path is not a trie prefix.
+
+Mark visited cells in-place, for example with `'#'`, then restore the char after backtracking.
+
+Store the full word at terminal trie nodes. When found, use `word.take()` so the same word is not returned twice.
+
+After DFS from a child, prune it if it has no word and no children left.
+
+Build: `O(total word chars)`. Search worst case: `O(rows * cols * 4^L)`, with trie pruning in practice. Space: `O(total word chars + L)`.
+
 ## Rust notes
 
 - `search` usually takes `&self`, not `&mut self`.
