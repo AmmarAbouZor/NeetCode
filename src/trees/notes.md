@@ -96,6 +96,28 @@ height = 1 + max(left_height, right_height)
 
 Common pitfall: returning diameter from DFS instead of returning height.
 
+## Binary Tree Maximum Path Sum
+
+DFS similar to tree diameter.
+
+At each node, compute left/right gains and ignore negative gains with `max(0)`.
+
+Update global answer with the best path passing through this node:
+
+```text
+node.val + left_gain + right_gain
+```
+
+Return only the best one-sided path to the parent:
+
+```text
+node.val + max(left_gain, right_gain)
+```
+
+The global answer must start from a real node value, not `0`, to handle all-negative trees.
+
+Time: `O(n)`, space: `O(h)` recursion stack.
+
 ## Good Nodes
 
 Track maximum value seen on current path.

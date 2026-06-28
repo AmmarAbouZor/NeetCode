@@ -7,6 +7,7 @@ pub mod kth_smallest_integer;
 pub mod level_order_traversal;
 pub mod lowest_common_ancestor;
 pub mod max_depth;
+pub mod max_path_sum;
 pub mod right_side_view;
 pub mod same_tree;
 pub mod subtree_of_another;
