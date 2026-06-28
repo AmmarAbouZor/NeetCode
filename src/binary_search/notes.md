@@ -102,6 +102,34 @@ if nums[mid] > nums[right] {
 
 The minimum is where `left == right`.
 
+## Median of Two Sorted Arrays
+
+Binary search the partition point in the shorter array.
+
+Think of the merged array split into left and right halves. If we choose:
+
+```text
+short_cut = number of elements from short array on the left
+long_cut = left_len - short_cut
+```
+
+A valid partition has:
+
+```text
+short_left <= long_right
+long_left <= short_right
+```
+
+Then every value on the left is `<=` every value on the right.
+
+For odd total length, the left half gets the extra element, so the median is `max(left side)`. For even total length, it is the average of `max(left side)` and `min(right side)`.
+
+Move binary search left if `short_left > long_right`; otherwise move right.
+
+Use sentinels for cuts at array edges: `i32::MIN` for missing left, `i32::MAX` for missing right.
+
+Time: `O(log(min(n, m)))`, space: `O(1)`.
+
 ## TimeMap
 
 Store values per key in timestamp order:
