@@ -99,6 +99,34 @@ Time: `O(s.len() + t.len())` average with `HashMap`. Space: `O(distinct chars in
 
 If using byte indexing, mention the ASCII input constraint.
 
+## Sliding Window Maximum
+
+Use a monotonic decreasing deque of indices.
+
+The front of the deque is always the max candidate for the current window.
+
+Before pushing `right`, pop from the back while values are smaller than `nums[right]`:
+
+```rust
+while nums[back] < nums[right] {
+    pop_back();
+}
+```
+
+Those smaller values can never become the max while `nums[right]` is in the window.
+
+Once a full window exists, remove indices from the front if they are outside the window:
+
+```rust
+left = right + 1 - k
+```
+
+Then `deque.front()` is the max index for that window.
+
+Using `<` keeps duplicate values in the deque, which is fine. The older duplicate expires first.
+
+Time: `O(n)`, because each index is pushed and popped at most once. Space: `O(k)`.
+
 ## Interview notes
 
 - Ask whether input alphabet is ASCII/lowercase/uppercase.
