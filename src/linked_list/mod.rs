@@ -7,4 +7,5 @@ pub mod merge_k_sorted;
 pub mod merge_two_sorted;
 pub mod remove_nth_node;
 pub mod reorder_list;
+pub mod reverse_k_groups;
 pub mod reverse_linked;

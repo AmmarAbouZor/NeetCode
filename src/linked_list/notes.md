@@ -25,6 +25,33 @@ Iterative reverse:
 
 Time: `O(n)`, space: `O(1)`.
 
+## Reverse Nodes in K Group
+
+Safe Rust approach:
+
+1. check that at least `k` nodes remain
+2. detach exactly `k` nodes
+3. reverse that detached group
+4. append it to the output
+5. attach the final short group unchanged
+
+Keep:
+
+```text
+remaining = unprocessed part of the list
+tail = mutable reference to where the next processed group should attach
+```
+
+The key ownership trick is to detach the group before reversing it:
+
+```rust
+remaining = after_group.take();
+```
+
+Then `reverse_list(group)` can reuse the normal linked-list reverse helper.
+
+Time: `O(n)`, because each node is checked and moved a constant number of times. Space: `O(1)`.
+
 ## Merge Two Sorted Lists
 
 Use a dummy head and mutable `tail`.
