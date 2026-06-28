@@ -83,6 +83,29 @@ Move the pointer with the smaller height. Moving the taller one cannot improve t
 
 Time: `O(n)`, space: `O(1)`.
 
+## Trapping Rain Water
+
+Water above a bar is limited by the shorter side:
+
+```text
+water[i] = min(max_left, max_right) - height[i]
+```
+
+Two-pointer version avoids precomputing left/right max arrays.
+
+Keep one pointer at each end and track the best wall seen from each side:
+
+```text
+max_left = tallest wall seen from the left
+max_right = tallest wall seen from the right
+```
+
+If `height[left] < height[right]`, the right side already has a wall tall enough, so process `left` using `max_left`. Otherwise, process `right` using `max_right`.
+
+Update the side max before adding water so the amount is never negative.
+
+Time: `O(n)`, space: `O(1)`.
+
 ## Interview reminders
 
 - Confirm whether output is values or indices.
