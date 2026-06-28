@@ -41,6 +41,26 @@ This attaches one node, moves tail to it, then detaches the rest back into `list
 
 Use `list1.or(list2)` to attach the remaining list. Time: `O(n + m)`, space: `O(1)`.
 
+## Merge K Sorted Lists
+
+Use divide-and-conquer with `merge_two_lists` as the conquer step.
+
+Merge lists in balanced rounds:
+
+```text
+round 1: merge pairs of size 1
+round 2: merge pairs of size 2
+round 3: merge pairs of size 4
+```
+
+Store merged lists in `next_round` so a merged list is not merged again until the next round.
+
+Each node participates in one merge per round, and there are `O(log K)` rounds.
+
+Time: `O(N log K)`, where `N` is the total number of nodes and `K` is `lists.len()`. Space: `O(K)` for round vectors; list nodes are reused.
+
+Heap also gives `O(N log K)`, but in Rust it needs more ordering boilerplate for linked-list nodes. Balanced merging is usually cleaner for interviews.
+
 ## Reorder List
 
 Safe Rust approach:
