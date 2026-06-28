@@ -181,6 +181,21 @@ right: [mid + 1, r)
 
 Time: `O(n)` with the map. Space: `O(n)` for the map/output and `O(h)` recursion stack.
 
+## Serialize and Deserialize Binary Tree
+
+Use preorder DFS with null markers.
+
+```text
+node,left,right
+1,2,n,n,3,n,n
+```
+
+During deserialize, consume tokens from left to right. Each recursive call reads one token: `n` returns `None`, otherwise create the node and recursively build left and right.
+
+Iterator version is clean because each subtree consumes exactly its own tokens.
+
+Time: `O(n)`, space: `O(h)` recursion stack, excluding the output string.
+
 ## Lowest Common Ancestor in BST
 
 Use BST ordering:
