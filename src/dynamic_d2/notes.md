@@ -148,6 +148,28 @@ if s1.len() + s2.len() != s3.len() {
 
 Time: `O(m * n)`. Space: `O(m * n)`.
 
+## Longest Increasing Path in a Matrix
+
+Top-down DP with DFS + memoization.
+
+State:
+
+```text
+dp[r][c] = length of the longest increasing path starting at cell (r, c)
+```
+
+From each cell, try 4-direction neighbors with strictly larger values:
+
+```text
+matrix[nr][nc] > matrix[r][c]
+```
+
+Memoization makes each cell computed once. The answer is the max `dp[r][c]` over all cells.
+
+Strictly increasing moves prevent cycles along a valid path.
+
+Time: `O(rows * cols)`. Space: `O(rows * cols)` for memoization plus recursion stack.
+
 ## Best Time to Buy/Sell Stock With Cooldown
 
 State:
