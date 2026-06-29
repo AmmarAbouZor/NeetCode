@@ -15,6 +15,30 @@ Always identify:
 - positive weights or possible negatives
 - whether the state is only `node`, or needs extra info like `stops`
 
+## Alien Dictionary
+
+Topological sort over characters.
+
+Words are already sorted in the alien language. Compare adjacent words; the first differing character gives one rule:
+
+```text
+word1[i] -> word2[i]
+```
+
+Only the first difference matters. Later characters do not give reliable ordering constraints.
+
+Build all unique chars as graph nodes, then add edges and indegrees from adjacent word pairs. Use a `HashSet` for neighbors so duplicate edges do not increment indegree twice.
+
+Invalid prefix case:
+
+```text
+"abc" before "ab"
+```
+
+Run Kahn's BFS topological sort: start with indegree-0 chars, pop one, append it, and decrement its neighbors. If the result does not contain all chars, a cycle exists.
+
+Time: `O(C + E)`, where `C` is total input characters and `E` is ordering edges. Space: `O(V + E)`.
+
 ## Reconstruct Itinerary
 
 Eulerian path in a directed graph. Each ticket is one directed edge and must be used exactly once.
