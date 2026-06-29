@@ -17,6 +17,29 @@ BinaryHeap<Reverse<i32>>
 
 Duplicates are allowed. A heap is not stable and does not keep all items sorted.
 
+## Median from Data Stream
+
+Use two heaps:
+
+- `lower`: max-heap for the smaller half
+- `upper`: min-heap for the larger half, using `Reverse`
+
+Invariants:
+
+```text
+every value in lower <= every value in upper
+lower.len() == upper.len() or lower.len() == upper.len() + 1
+```
+
+Keep `lower` as the heap with the extra element when the total count is odd.
+
+Median:
+
+- odd count: `lower.peek()`
+- even count: average of `lower.peek()` and `upper.peek()`
+
+`add_num`: `O(log n)`. `find_median`: `O(1)`. Space: `O(n)`.
+
 ## Kth largest patterns
 
 For kth largest in an array/stream, keep a min-heap of size `k`.
