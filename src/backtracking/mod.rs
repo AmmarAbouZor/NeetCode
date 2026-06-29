@@ -2,6 +2,7 @@ pub mod combination_sum;
 pub mod combination_sum_2;
 pub mod generate_paren;
 pub mod letter_comp_phone;
+pub mod n_queens;
 pub mod palindrome_partitioning;
 pub mod permutations;
 pub mod subset;

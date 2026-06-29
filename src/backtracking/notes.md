@@ -185,6 +185,31 @@ for ch in digit_chars(digits[idx]) {
 }
 ```
 
+### N-Queens
+
+Place one queen per row, so rows do not need tracking.
+
+Track invalid future positions with:
+
+```text
+cols: used columns
+main diagonal: r - c
+anti diagonal: r + c
+```
+
+The set version is easiest to code in an interview because the diagonal formulas stay direct.
+
+Optimized bool-array version:
+
+```text
+main_d_idx = r + n - 1 - c  // shifted r - c to avoid negative index
+anti_d_idx = r + c
+```
+
+Backtrack by placing `Q`, marking column/diagonals, recursing to `r + 1`, then undoing.
+
+Time: `O(n!)` with pruning. Space: `O(n^2)` for the board plus tracking state.
+
 ### Backtracking Big-O notes
 
 - Subsets: `O(n * 2^n)`
