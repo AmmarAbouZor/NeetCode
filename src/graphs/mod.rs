@@ -11,3 +11,4 @@ pub mod redundant_connection;
 pub mod rotten_fruit;
 pub mod surround_regions;
 pub mod valid_tree;
+pub mod word_ladder;

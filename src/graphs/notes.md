@@ -16,6 +16,20 @@ Pick traversal based on what the problem asks:
 - DFS state coloring or Kahn's algorithm for course scheduling
 - Union Find for undirected connectivity and cycle detection
 
+## Word Ladder
+
+Shortest path in an implicit graph.
+
+Each word is a node. Two words have an edge if they differ by one character. Use BFS because every transformation has equal cost.
+
+Generate neighbors by changing each character to `a..=z` and checking the word set.
+
+Remove words from the set when enqueuing to mark visited and avoid cycles.
+
+Bidirectional BFS is a good follow-up: keep frontiers from `begin` and `end`, always expand the smaller frontier, and stop when a generated word is in the opposite frontier.
+
+Time: `O(N * L * 26 * L)` including hashing, often simplified to `O(N * L * 26)`. Space: `O(N * L)`.
+
 ## Grid traversal
 
 Use the grid as an implicit graph. Each cell is a node and neighbors are usually up/down/left/right.
