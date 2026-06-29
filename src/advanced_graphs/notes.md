@@ -69,6 +69,22 @@ Node labels are `1..=n`, so use vectors of length `n + 1` and skip index `0`.
 
 Time: `O((V + E) log V)`, often written as `O(E log V)`. Space: `O(V + E)`.
 
+## Swim in Rising Water
+
+Dijkstra / minimum bottleneck path.
+
+Path cost is the maximum elevation seen on the path, not the sum of edge costs.
+
+Transition:
+
+```text
+next_time = max(current_time, grid[next_r][next_c])
+```
+
+Use a min-heap ordered by required time. The first time the bottom-right cell is popped, that time is optimal.
+
+Time: `O(n^2 log n)` for an `n x n` grid. Space: `O(n^2)`.
+
 ## Min Cost to Connect Points
 
 Minimum spanning tree problem.
