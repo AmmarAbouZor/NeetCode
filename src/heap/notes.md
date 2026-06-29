@@ -93,6 +93,26 @@ Use max-heap. Pop two largest, push their difference if non-zero.
 - Smashing loop: `O(n log n)`
 - Space: `O(n)`
 
+## Minimum Interval to Include Each Query
+
+Sweep queries from smallest to largest.
+
+Sort intervals by start and sort queries while keeping original indices. For each query:
+
+1. push intervals with `start <= query` into a min-heap
+2. pop intervals with `end < query`
+3. heap top is the smallest valid interval
+
+Heap stores:
+
+```rust
+Reverse((length, end))
+```
+
+Use `peekable()` or an index for intervals. Do not use `take_while`, because it consumes the first interval that fails the condition and loses it for later queries.
+
+Time: `O(n log n + q log q)`. Space: `O(n + q)`.
+
 ## Task Scheduler
 
 General simulation uses:
