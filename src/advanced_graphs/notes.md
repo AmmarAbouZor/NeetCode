@@ -15,6 +15,28 @@ Always identify:
 - positive weights or possible negatives
 - whether the state is only `node`, or needs extra info like `stops`
 
+## Reconstruct Itinerary
+
+Eulerian path in a directed graph. Each ticket is one directed edge and must be used exactly once.
+
+Use Hierholzer's algorithm starting from `JFK`.
+
+Sort each adjacency list in descending lexical order so `pop()` returns the smallest destination.
+
+DFS consumes outgoing edges first, then pushes the airport in postorder:
+
+```text
+while next = graph[node].pop():
+    dfs(next)
+res.push(node)
+```
+
+Postorder builds the itinerary in reverse, so reverse `res` at the end.
+
+If no solution is guaranteed, validate `res.len() == tickets.len() + 1` to ensure all edges were used.
+
+Time: `O(E log E)` for sorting plus `O(E)` DFS. Space: `O(E)`.
+
 ## Network Delay Time
 
 Shortest paths from one source in a directed weighted graph with positive weights.

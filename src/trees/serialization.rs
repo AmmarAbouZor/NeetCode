@@ -24,6 +24,7 @@ impl TreeNode {
 // Each recursive call reads one token, then recursively rebuilds left and right.
 // Time: O(n), space: O(h) recursion stack, excluding the output string.
 
+#[derive(Default)]
 pub struct Codec;
 
 impl Codec {
