@@ -1,5 +1,6 @@
 pub mod buy_sell_stocks_cooldown;
 pub mod coin_change_2;
+pub mod dist_subsequence;
 pub mod edit_distance;
 pub mod interleaving_string;
 pub mod long_increase_matrix;

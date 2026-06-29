@@ -79,6 +79,46 @@ Space optimization: keep previous row and current row.
 
 Time: `O(m * n)`. Space: `O(m * n)` full table, `O(n)` with two rows.
 
+## Distinct Subsequences
+
+DP over prefixes.
+
+Bottom-up state:
+
+```text
+dp[i][j] = number of ways to form t[0..j] using s[0..i]
+```
+
+Base:
+
+```text
+dp[i][0] = 1
+```
+
+Empty `t` can be formed from any prefix of `s` by choosing no chars.
+
+Transition for current chars `s[i - 1]` and `t[j - 1]`:
+
+- always skip current `s` char: `dp[i - 1][j]`
+- if chars match, also use it: `dp[i - 1][j - 1]`
+
+```text
+if s[i - 1] == t[j - 1]:
+    dp[i][j] = dp[i - 1][j] + dp[i - 1][j - 1]
+else:
+    dp[i][j] = dp[i - 1][j]
+```
+
+Top-down version uses suffix state:
+
+```text
+dfs(i, j) = ways to form t[j..] from s[i..]
+```
+
+Same choices: skip `s[i]`, and if chars match, include it and advance both indices.
+
+Time: `O(s.len() * t.len())`. Space: `O(s.len() * t.len())`.
+
 ## Edit Distance
 
 State:
