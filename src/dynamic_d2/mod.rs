@@ -6,5 +6,6 @@ pub mod edit_distance;
 pub mod interleaving_string;
 pub mod long_increase_matrix;
 pub mod longest_subsequence;
+pub mod regular_expression;
 pub mod target_sum;
 pub mod unique_paths;

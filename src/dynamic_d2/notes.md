@@ -154,6 +154,53 @@ The recurrence is easier if you reason backward from the final operation.
 
 Time: `O(m * n)`. Space: `O(m * n)`.
 
+## Regular Expression Matching
+
+DP over prefixes.
+
+State:
+
+```text
+dp[i][j] = true if s[0..i] matches p[0..j]
+```
+
+Base:
+
+```text
+dp[0][0] = true
+```
+
+Empty string can match patterns like `a*` or `a*b*` by skipping each `x*` group:
+
+```text
+if p[j - 1] == '*':
+    dp[0][j] = dp[0][j - 2]
+```
+
+For normal chars or `.`:
+
+```text
+if p[j - 1] == s[i - 1] || p[j - 1] == '.':
+    dp[i][j] = dp[i - 1][j - 1]
+```
+
+For `*`, it applies to the previous pattern char `x`:
+
+- zero occurrences: `dp[i][j - 2]`
+- one or more occurrences, if `x` matches `s[i - 1]`: `dp[i - 1][j]`
+
+Stay at the same pattern prefix for one-or-more because `x*` may match more chars.
+
+Top-down version uses suffix state:
+
+```text
+dfs(i, j) = whether s[i..] matches p[j..]
+```
+
+Same choices for `*`: skip the `x*` group, or consume one matching string char and stay on `j`.
+
+Time: `O(s.len() * p.len())`. Space: `O(s.len() * p.len())`.
+
 ## Interleaving String
 
 State:
