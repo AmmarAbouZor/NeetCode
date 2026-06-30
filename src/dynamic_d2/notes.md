@@ -210,6 +210,42 @@ Strictly increasing moves prevent cycles along a valid path.
 
 Time: `O(rows * cols)`. Space: `O(rows * cols)` for memoization plus recursion stack.
 
+## Burst Balloons
+
+Interval DP.
+
+Key mental model: choose which balloon is burst last inside an interval, not which balloon is burst first.
+
+Add virtual boundary balloons:
+
+```text
+vals = [1] + nums + [1]
+```
+
+State:
+
+```text
+dp[left][right] = max coins from bursting all balloons strictly between left and right
+```
+
+`left` and `right` are fixed boundaries for the subproblem. If `mid` is the last balloon burst inside `(left, right)`, then its neighbors are known:
+
+```text
+vals[left] * vals[mid] * vals[right]
+```
+
+Transition:
+
+```text
+dp[left][right] = max(
+    dp[left][mid] + vals[left] * vals[mid] * vals[right] + dp[mid][right]
+)
+```
+
+Fill smaller intervals first using `gap = right - left`. Start at `gap = 2` because there must be at least one balloon between the boundaries.
+
+Time: `O(n^3)`, for `O(n^2)` intervals and `O(n)` choices per interval. Space: `O(n^2)`.
+
 ## Best Time to Buy/Sell Stock With Cooldown
 
 State:

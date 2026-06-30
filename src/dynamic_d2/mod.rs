@@ -1,3 +1,4 @@
+pub mod burst_balloons;
 pub mod buy_sell_stocks_cooldown;
 pub mod coin_change_2;
 pub mod dist_subsequence;
