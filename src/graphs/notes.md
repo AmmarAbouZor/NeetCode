@@ -200,7 +200,9 @@ Time: `O(V + E)`. Space: `O(V + E)`.
 
 ## Course Schedule II
 
-Same cycle detection, but push course after resolving prerequisites.
+Return a valid topological ordering.
+
+DFS version: same cycle detection as Course Schedule I, but push course after resolving prerequisites.
 
 If graph is `course -> prerequisites`, postorder directly gives a valid order:
 
@@ -211,7 +213,17 @@ for prereq in graph[course] {
 output.push(course);
 ```
 
-If graph is `prerequisite -> unlocked courses`, output handling is different, often reversed or handled with Kahn's algorithm.
+Kahn BFS version: build edges `prerequisite -> course`.
+
+```text
+indegree[c] = number of prerequisites course c still needs
+```
+
+Start queue with all courses that have `indegree == 0`. When a course is taken, decrement indegree for the courses it unlocks. If a neighbor reaches `0`, it is ready.
+
+If processed count is less than `num_courses`, a cycle exists, so return empty.
+
+Time: `O(V + E)`. Space: `O(V + E)`.
 
 ## Valid Tree
 
