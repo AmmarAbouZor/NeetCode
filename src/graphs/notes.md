@@ -225,6 +225,35 @@ If processed count is less than `num_courses`, a cycle exists, so return empty.
 
 Time: `O(V + E)`. Space: `O(V + E)`.
 
+## Course Schedule IV
+
+Preprocess prerequisite reachability, then answer queries in `O(1)` average.
+
+Use Kahn's topological sort with edges:
+
+```text
+prerequisite -> course
+```
+
+Keep:
+
+```text
+deps[c] = all direct and indirect prerequisites of course c
+```
+
+When processing `parent -> child`, `parent` is a direct prerequisite of `child`, and everything in `deps[parent]` is also an indirect prerequisite of `child`.
+
+```text
+deps[child].insert(parent)
+deps[child].extend(deps[parent])
+```
+
+Topological order matters because `deps[parent]` must be complete before merging it into children.
+
+Answer query `[u, v]` by checking whether `u` is in `deps[v]`.
+
+Time: `O(E * V + Q)`, because each edge may merge up to `O(V)` prerequisites. Space: `O(V^2 + E + Q)`, or `O(V^2 + E)` excluding output.
+
 ## Valid Tree
 
 An undirected graph is a tree if:

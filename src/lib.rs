@@ -1,3 +1,6 @@
+// Easier to understand for algorithmic solutions
+#![allow(clippy::needless_range_loop)]
+
 pub mod advanced_graphs;
 pub mod arrays_hashing;
 pub mod backtracking;

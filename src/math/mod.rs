@@ -1,6 +1,3 @@
-// For loop or easier to understand for math problems
-#![allow(clippy::needless_range_loop)]
-
 pub mod detect_squares;
 pub mod happy_number;
 pub mod multiply_strings;
