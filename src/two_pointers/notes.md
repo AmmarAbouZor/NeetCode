@@ -34,6 +34,25 @@ Handle empty string before `len() - 1`, or use `saturating_sub`.
 
 Time: `O(n)`, space: `O(1)`.
 
+## Valid Palindrome II
+
+Two pointers with one allowed deletion.
+
+Move inward while chars match. At the first mismatch, the only possible fixes are:
+
+- delete the left char
+- delete the right char
+
+Check whether either remaining slice is a palindrome:
+
+```rust
+valid_slice(left + 1, right) || valid_slice(left, right - 1)
+```
+
+Do not greedily choose one side just because the next chars match; the whole remaining slice must be valid.
+
+Time: `O(n)`, space: `O(1)`.
+
 ## Two Sum II: sorted input
 
 Return 1-indexed indices, not values.
