@@ -77,6 +77,34 @@ For an obstacle, set `dp[c] = 0` so cells below cannot use it as a path from abo
 
 Time: `O(m * n)`. Space: `O(n)` optimized, `O(m * n)` full table.
 
+## Minimum Path Sum
+
+Grid DP.
+
+State:
+
+```text
+dp[r][c] = minimum path sum to reach cell (r, c)
+```
+
+Each cell can only be reached from above or left:
+
+```text
+dp[r][c] = grid[r][c] + min(dp[r - 1][c], dp[r][c - 1])
+```
+
+For full-table DP, either initialize the first row/column explicitly, or use sentinel `inf` values and one uniform loop.
+
+Space-optimized state:
+
+```text
+dp[c] = minimum path sum to reach column c in the current row
+```
+
+Before update, `dp[c]` is the value from top. After update, `dp[c - 1]` is the value from left in the current row.
+
+Time: `O(m * n)`. Space: `O(n)` optimized, `O(m * n)` full table.
+
 ## Longest Common Subsequence
 
 DP over prefixes of two strings.
