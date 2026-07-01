@@ -51,6 +51,32 @@ for _ in 1..m {
 
 Time: `O(m * n)`. Space: `O(n)` with row DP, `O(m * n)` with full grid.
 
+## Unique Paths II
+
+Same grid DP, but obstacles make cells unreachable.
+
+Full-table state:
+
+```text
+dp[r][c] = number of ways to reach cell (r, c)
+```
+
+If `obstacle_grid[r][c] == 1`, keep `dp[r][c] = 0`. Otherwise add ways from top and left.
+
+Unlike Unique Paths I, the first row and column are not automatically `1` because an obstacle can block the path.
+
+Space-optimized state:
+
+```text
+dp[c] = number of ways to reach column c in the current row
+```
+
+Before update, `dp[c]` is ways from top. After update, `dp[c - 1]` is ways from left in the current row.
+
+For an obstacle, set `dp[c] = 0` so cells below cannot use it as a path from above.
+
+Time: `O(m * n)`. Space: `O(n)` optimized, `O(m * n)` full table.
+
 ## Longest Common Subsequence
 
 DP over prefixes of two strings.

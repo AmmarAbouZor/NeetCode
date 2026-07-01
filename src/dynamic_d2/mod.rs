@@ -9,3 +9,4 @@ pub mod longest_subsequence;
 pub mod regular_expression;
 pub mod target_sum;
 pub mod unique_paths;
+pub mod unique_paths_2;
