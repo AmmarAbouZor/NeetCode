@@ -93,6 +93,26 @@ Use max-heap. Pop two largest, push their difference if non-zero.
 - Smashing loop: `O(n log n)`
 - Space: `O(n)`
 
+## Reorganize String
+
+Max-heap greedy by remaining character count.
+
+Always place the character with the largest remaining count, but keep the previously used character out of the heap for one round. This prevents placing the same character next to itself.
+
+Keep:
+
+```text
+prev = character just used that still has remaining count
+```
+
+After placing a different character, push `prev` back into the heap.
+
+If the heap becomes empty while `prev` still exists, no valid reorganization is possible.
+
+For lowercase English letters, the heap has at most `26` entries.
+
+Time: `O(n log 26)`, effectively `O(n)`. Space: `O(n)` including output, `O(1)` extra space.
+
 ## Minimum Interval to Include Each Query
 
 Sweep queries from smallest to largest.
