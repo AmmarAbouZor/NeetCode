@@ -113,6 +113,26 @@ For lowercase English letters, the heap has at most `26` entries.
 
 Time: `O(n log 26)`, effectively `O(n)`. Space: `O(n)` including output, `O(1)` extra space.
 
+## Longest Happy String
+
+Max-heap greedy by remaining character count.
+
+Always try to use the character with the largest remaining count. If it would create three equal characters in a row, use the next most frequent character instead.
+
+Blocked case:
+
+```text
+res ends with ch, ch and heap top is ch
+```
+
+Then pop the second-best character, append it, push it back if count remains, and also push the blocked character back.
+
+If the best character is blocked and there is no second choice, stop. The current string is the longest valid string possible.
+
+The heap has at most `3` entries: `a`, `b`, and `c`.
+
+Time: `O(n log 3)`, effectively `O(n)`, where `n = a + b + c`. Space: `O(n)` including output, `O(1)` extra space.
+
 ## Minimum Interval to Include Each Query
 
 Sweep queries from smallest to largest.
