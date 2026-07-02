@@ -361,6 +361,24 @@ if dsu.union(a, b) {
 }
 ```
 
+## Accounts Merge
+
+Union Find over emails.
+
+Treat each unique email as a node. Emails in the same account belong to the same person, so union every email in an account with the first email.
+
+Keep a map:
+
+```text
+email_to_id[email] = DSU node id
+```
+
+After all unions, each DSU component is one merged account. Group emails by root, sort each group lexicographically, and prepend the account name.
+
+The output account order does not matter, but emails inside each account must be sorted.
+
+Time: `O(E * α(U) + U log U)`, where `E` is total email entries and `U` is unique emails. Space: `O(U)` excluding output.
+
 ## Redundant Connection
 
 Original graph is a tree plus one extra edge. Process edges with Union Find.

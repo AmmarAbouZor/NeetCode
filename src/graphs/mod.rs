@@ -1,3 +1,4 @@
+pub mod accounts_merge;
 pub mod clone_graph;
 pub mod course_schedule;
 pub mod course_schedule_2;

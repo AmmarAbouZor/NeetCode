@@ -2,7 +2,7 @@ use std::collections::{HashSet, VecDeque};
 
 // BFS over an implicit graph for lock states.
 //
-// Each 4-digit code is a node. An edge exists between two codes if one wheel is 
+// Each 4-digit code is a node. An edge exists between two codes if one wheel is
 // turned one step forward and backward.
 //
 // Since every move has cost 1, BFS gives a minimum number of turns. The first
@@ -42,8 +42,8 @@ pub fn open_lock(deadends: Vec<String>, target: String) -> i32 {
             if visited.contains(&next) || deadends.contains(&next) {
                 continue;
             }
-            
-            // Mark visited when adding to queue to avoid pushing the same 
+
+            // Mark visited when adding to queue to avoid pushing the same
             // state multiple times.
             visited.insert(next.clone());
             queue.push_back((next, steps + 1));
@@ -64,7 +64,7 @@ fn get_neighbors(node: &[u8]) -> Vec<Vec<u8>> {
 
         // Add 9 before modulo to move backward and without underflow.
         let prev = (curr + 9) % 10;
-        
+
         let next = (curr + 1) % 10;
 
         let mut prev_node = node.to_owned();
