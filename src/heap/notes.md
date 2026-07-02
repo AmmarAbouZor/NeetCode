@@ -131,6 +131,43 @@ Time: `O(N + T log A)`, where `T` is final schedule length and `A` is unique tas
 
 For this exact LeetCode problem, a greedy formula also exists, but heap + queue is the general scheduler pattern.
 
+## Single-Threaded CPU
+
+Simulation with a min-heap of ready tasks.
+
+CPU rule:
+
+```text
+pick the available task with smallest processing time
+break ties by original index
+```
+
+Store ready tasks as:
+
+```rust
+Reverse((process_time, index))
+```
+
+Sort-upfront version:
+
+- sort all tasks by enqueue time
+- keep `idx` pointing to the next task not yet added to the heap
+- move tasks with `enqueue_time <= time` into the heap
+- if heap is empty, jump `time` to the next enqueue time
+
+This is the standard static-input solution when all tasks are known in advance.
+
+Two-heap version:
+
+- `pending`: tasks not available yet, ordered by enqueue time
+- `ready`: available tasks, ordered by processing time and index
+
+The two-heap version has the same Big-O and is useful if tasks can be added dynamically while the scheduler is running.
+
+Use `u64` for enqueue/process/time because total time can exceed `i32`. Keep indices as `usize`.
+
+Time: `O(n log n)`, from sorting/heap operations or moving each task through heaps. Space: `O(n)`.
+
 ## Design Twitter
 
 Store per user:
