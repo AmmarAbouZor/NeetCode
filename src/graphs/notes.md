@@ -30,6 +30,27 @@ Bidirectional BFS is a good follow-up: keep frontiers from `begin` and `end`, al
 
 Time: `O(N * L * 26 * L)` including hashing, often simplified to `O(N * L * 26)`. Space: `O(N * L)`.
 
+## Open Lock
+
+Shortest path in an implicit graph.
+
+Each 4-digit code is a node. Turning one wheel one step forward or backward creates an edge with cost `1`. Use BFS because every move has equal cost.
+
+Start from `"0000"`. If it is a deadend, return `-1` immediately.
+
+Generate neighbors by changing each digit one step down and one step up, wrapping between `0` and `9`:
+
+```text
+prev = (digit + 9) % 10
+next = (digit + 1) % 10
+```
+
+Mark states visited when enqueuing so the same lock state is not pushed multiple times.
+
+Deadends are blocked states: never enqueue them.
+
+Time: `O(10^4 * 4)`, because there are at most `10^4` states and each state generates `2` neighbors per digit. Space: `O(10^4)`.
+
 ## Grid traversal
 
 Use the grid as an implicit graph. Each cell is a node and neighbors are usually up/down/left/right.

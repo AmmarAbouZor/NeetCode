@@ -7,6 +7,7 @@ pub mod max_island;
 pub mod num_connected;
 pub mod num_connected_union;
 pub mod number_islands;
+pub mod open_lock;
 pub mod pacific_atlantic;
 pub mod redundant_connection;
 pub mod rotten_fruit;
