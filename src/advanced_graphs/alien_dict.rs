@@ -105,3 +105,60 @@ pub fn foreign_dictionary(words: Vec<String>) -> String {
         String::new()
     }
 }
+
+// Same Kahn topological sort, written with iterator helpers.
+pub fn foreign_dictionary_iter(words: Vec<String>) -> String {
+    let mut graph: HashMap<u8, HashSet<u8>> = HashMap::new();
+    let mut indegree: HashMap<u8, i32> = HashMap::new();
+
+    for ch in words.iter().flat_map(|word| word.bytes()) {
+        graph.entry(ch).or_default();
+        indegree.entry(ch).or_insert(0);
+    }
+
+    for window in words.windows(2) {
+        let word1 = window[0].as_bytes();
+        let word2 = window[1].as_bytes();
+
+        let first_diff = word1.iter().zip(word2).position(|(ch1, ch2)| ch1 != ch2);
+
+        if let Some(idx) = first_diff {
+            let from = word1[idx];
+            let to = word2[idx];
+
+            let neighbors = graph.get_mut(&from).expect("all chars were added");
+            if neighbors.insert(to) {
+                *indegree.get_mut(&to).expect("all chars were added") += 1;
+            }
+        } else if word1.len() > word2.len() {
+            return String::new();
+        }
+    }
+
+    let mut queue: VecDeque<u8> = indegree
+        .iter()
+        .filter_map(|(&ch, &degree)| (degree == 0).then_some(ch))
+        .collect();
+
+    let mut res = Vec::with_capacity(indegree.len());
+
+    while let Some(ch) = queue.pop_front() {
+        res.push(ch);
+
+        let neighbors = graph.get(&ch).expect("all chars were added");
+        for &next in neighbors {
+            let degree = indegree.get_mut(&next).expect("all chars were added");
+            *degree -= 1;
+
+            if *degree == 0 {
+                queue.push_back(next);
+            }
+        }
+    }
+
+    if res.len() == indegree.len() {
+        String::from_utf8(res).expect("input contains valid ASCII chars")
+    } else {
+        String::new()
+    }
+}
