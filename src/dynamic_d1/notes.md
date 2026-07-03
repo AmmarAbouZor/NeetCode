@@ -255,6 +255,32 @@ Return `-1` if `dp[amount]` is still impossible.
 
 Time: `O(amount * c)`, where `c = coins.len()`. Space: `O(amount)`.
 
+## Perfect Squares
+
+Bottom-up DP, similar to Coin Change where the coins are square numbers.
+
+State:
+
+```text
+dp[num] = minimum number of perfect squares needed to sum to num
+```
+
+Precompute all squares `<= n`, then for each `num`, try every square as the last picked value:
+
+```text
+dp[num] = min(dp[num], 1 + dp[num - square])
+```
+
+Base:
+
+```text
+dp[0] = 0
+```
+
+Use `n + 1` as infinity because the worst case is using `1^2` exactly `n` times.
+
+Time: `O(n * sqrt(n))`. Space: `O(n + sqrt(n))`.
+
 ## Combination Sum IV
 
 Bottom-up DP where order matters.
