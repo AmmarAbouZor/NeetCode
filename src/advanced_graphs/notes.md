@@ -109,6 +109,29 @@ Use a min-heap ordered by required time. The first time the bottom-right cell is
 
 Time: `O(n^2 log n)` for an `n x n` grid. Space: `O(n^2)`.
 
+## Path With Minimum Effort
+
+Dijkstra / minimum bottleneck path.
+
+Path cost is the maximum absolute height difference between adjacent cells on the path, not the sum of differences.
+
+State:
+
+```text
+diffs[r][c] = minimum effort needed to reach cell (r, c)
+```
+
+Transition:
+
+```text
+edge_diff = abs(heights[r][c] - heights[next_r][next_c])
+next_diff = max(current_diff, edge_diff)
+```
+
+Use a min-heap ordered by effort. The first time the bottom-right cell is popped, its effort is optimal.
+
+Time: `O(rows * cols * log(rows * cols))`. Space: `O(rows * cols)`.
+
 ## Min Cost to Connect Points
 
 Minimum spanning tree problem.
