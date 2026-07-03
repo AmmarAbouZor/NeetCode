@@ -1,5 +1,6 @@
 pub mod climbing_stairs;
 pub mod coin_change;
+pub mod combination_sum_4;
 pub mod decode_ways;
 pub mod house_robber;
 pub mod house_robber_2;
@@ -9,4 +10,5 @@ pub mod max_product_sub;
 pub mod min_cost_climb_stair;
 pub mod palindromic_substring;
 pub mod part_eq_subset_sum;
+pub mod tribonacci;
 pub mod word_break;

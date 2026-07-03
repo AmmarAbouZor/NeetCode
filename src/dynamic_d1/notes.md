@@ -55,6 +55,40 @@ The last move is either:
 
 Time: `O(n)`. Space: `O(n)` with array, `O(1)` with two variables.
 
+## Tribonacci Number
+
+Same Fibonacci-style DP, but each state depends on the previous three states.
+
+State:
+
+```text
+dp[i] = the i-th Tribonacci number
+```
+
+Base:
+
+```text
+dp[0] = 0
+dp[1] = 1
+dp[2] = 1
+```
+
+Recurrence:
+
+```text
+dp[i] = dp[i - 1] + dp[i - 2] + dp[i - 3]
+```
+
+Can be space-optimized with three variables:
+
+```text
+prev1 = dp[i - 1]
+prev2 = dp[i - 2]
+prev3 = dp[i - 3]
+```
+
+Time: `O(n)`. Space: `O(n)` with array, `O(1)` with three variables.
+
 ## Min Cost Climbing Stairs
 
 State:
@@ -220,6 +254,34 @@ Initialize unreachable states with `amount + 1`, not `i32::MAX`, to avoid overfl
 Return `-1` if `dp[amount]` is still impossible.
 
 Time: `O(amount * c)`, where `c = coins.len()`. Space: `O(amount)`.
+
+## Combination Sum IV
+
+Bottom-up DP where order matters.
+
+State:
+
+```text
+dp[total] = number of ordered combinations that sum to total
+```
+
+For each total, try every number as the last picked value:
+
+```text
+dp[total] += dp[total - num]
+```
+
+Base:
+
+```text
+dp[0] = 1
+```
+
+There is one way to build sum `0`: pick nothing. This lets a single number equal to `total` contribute one way.
+
+Loop order matters. Iterating `total` outside and `nums` inside counts ordered sequences like `[1, 2]` and `[2, 1]` separately.
+
+Time: `O(target * n)`, where `n = nums.len()`. Space: `O(target)`.
 
 ## Maximum Product Subarray
 
