@@ -60,6 +60,24 @@ Works with negative numbers, unlike sliding window.
 
 Time: `O(n)`. Space: `O(n)`.
 
+## First Missing Positive
+
+In-place index placement.
+
+For an array of length `n`, the first missing positive must be in `1..=n + 1`.
+
+Place each value `x` at index `x - 1` when `1 <= x <= n`:
+
+```text
+nums[x - 1] = x
+```
+
+After placement, scan left to right. The first index `i` where `nums[i] != i + 1` gives answer `i + 1`. If all positions are correct, answer is `n + 1`.
+
+Check for duplicates before swapping. Without this, values like `[1, 1]` can cause an infinite loop.
+
+Time: `O(n)`, because each swap places at least one value in its correct spot. Space: `O(1)`.
+
 ## Group Anagrams
 
 Use character-count array as the group key:

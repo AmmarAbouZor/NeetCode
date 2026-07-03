@@ -1,6 +1,7 @@
 pub mod anagram;
 pub mod contains_duplicate;
 pub mod encode_decode_strings;
+pub mod first_missing_positive;
 pub mod group_anagram;
 pub mod longest_consecutive_seq;
 pub mod product_except_self;
