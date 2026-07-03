@@ -26,28 +26,22 @@ pub fn min_cost_connect_points(points: Vec<Vec<i32>>) -> i32 {
     let mut total_cost = 0;
 
     for _ in 0..n {
-        let mut next = None;
-
-        for i in 0..n {
-            if !visited[i] && next.is_none_or(|j| min_dist[i] < min_dist[j]) {
-                next = Some(i);
-            }
-        }
-
-        let point = next.unwrap();
+        let point = (0..n)
+            .filter(|&i| !visited[i])
+            .min_by_key(|&i| min_dist[i])
+            .expect("There is always at least one unvisited point in each Prim step");
 
         visited[point] = true;
         total_cost += min_dist[point];
 
-        for i in 0..n {
-            if visited[i] {
+        let cur = &points[point];
+        for (idx, next) in points.iter().enumerate() {
+            if visited[idx] {
                 continue;
             }
 
-            let cur = &points[point];
-            let next = &points[i];
             let next_dist = (cur[0] - next[0]).abs() + (cur[1] - next[1]).abs();
-            min_dist[i] = min_dist[i].min(next_dist);
+            min_dist[idx] = min_dist[idx].min(next_dist);
         }
     }
 
@@ -86,16 +80,15 @@ pub fn min_cost_connect_points_heap(points: Vec<Vec<i32>>) -> i32 {
         visited_count += 1;
         total_cost += cost;
 
-        for i in 0..n {
-            if visited[i] {
+        let cur = &points[point];
+        for (idx, next) in points.iter().enumerate() {
+            if visited[idx] {
                 continue;
             }
 
-            let cur = &points[point];
-            let next = &points[i];
             let dist = (cur[0] - next[0]).abs() + (cur[1] - next[1]).abs();
 
-            heap.push(Reverse((dist, i)));
+            heap.push(Reverse((dist, idx)));
         }
     }
 
