@@ -47,6 +47,27 @@ while left < right {
 
 Return `left`.
 
+## Split Array Largest Sum
+
+Binary search on the answer.
+
+We minimize the largest subarray sum after splitting `nums` into `k` non-empty continuous parts.
+
+Search range:
+
+```text
+left = max(nums)   // no part can be smaller than the largest number
+right = sum(nums)  // one part containing everything
+```
+
+For a candidate `limit`, greedily count how many parts are needed if every part must have sum `<= limit`.
+
+Greedy is valid because numbers are non-negative: keep adding to the current part until the next number would exceed `limit`, then start a new part.
+
+If we need `<= k` parts, `limit` is feasible, so try smaller. Otherwise, `limit` is too small.
+
+Time: `O(n * log(sum(nums) - max(nums)))`. Space: `O(1)`.
+
 ## Koko Eating Bananas
 
 Search speed `k` from `1..=max(piles)`.
