@@ -39,6 +39,25 @@ Run Kahn's BFS topological sort: start with indegree-0 chars, pop one, append it
 
 Time: `O(C + E)`, where `C` is total input characters and `E` is ordering edges. Space: `O(V + E)`.
 
+## Build Matrix With Conditions
+
+Topological sort rows and columns independently.
+
+Row conditions decide vertical order. Column conditions decide horizontal order. If either graph has a cycle, no valid matrix exists.
+
+After both topo orders are built, map each number to its row and column position:
+
+```text
+row_pos[num] = index in row_order
+col_pos[num] = index in col_order
+```
+
+Place each number at `matrix[row_pos[num]][col_pos[num]]`.
+
+Use Kahn's algorithm for each condition graph. If a topo sort processes fewer than `k` nodes, that graph has a cycle.
+
+Time: `O(k^2 + R + C)`, where `R` and `C` are row/column condition counts. Topo sorting costs `O(k + R + C)`, and building the matrix costs `O(k^2)`. Space: `O(k^2 + R + C)` including output.
+
 ## Reconstruct Itinerary
 
 Eulerian path in a directed graph. Each ticket is one directed edge and must be used exactly once.
