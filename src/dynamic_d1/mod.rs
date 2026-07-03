@@ -4,6 +4,7 @@ pub mod combination_sum_4;
 pub mod decode_ways;
 pub mod house_robber;
 pub mod house_robber_2;
+pub mod integer_break;
 pub mod long_increase_subsequence;
 pub mod longest_palindrome;
 pub mod max_product_sub;

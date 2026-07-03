@@ -309,6 +309,31 @@ Loop order matters. Iterating `total` outside and `nums` inside counts ordered s
 
 Time: `O(target * n)`, where `n = nums.len()`. Space: `O(target)`.
 
+## Integer Break
+
+Bottom-up DP with a slightly tricky state.
+
+State:
+
+```text
+dp[num] = max product from num, where num is allowed to stay unbroken
+```
+
+Allowing smaller pieces to stay unbroken matters. For example, while solving `10`, a piece `3` should be allowed to contribute `3`, not be forced into `1 * 2`.
+
+For the original `n`, we must split it at least once, so initialize its value as `0`. For smaller `num`, initialize with `num` so it can be used as a whole piece.
+
+For each split:
+
+```text
+num = left + right
+dp[num] = max(dp[num], dp[left] * dp[right])
+```
+
+Time: `O(n^2)`. Space: `O(n)`.
+
+Greedy/math follow-up: use mostly `3`s, with a small adjustment when the remainder is `1`.
+
 ## Maximum Product Subarray
 
 Kadane-style DP, but track both max and min product ending at current index.
