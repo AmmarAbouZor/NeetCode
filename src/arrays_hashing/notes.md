@@ -37,6 +37,29 @@ map.insert(target - num, idx);
 
 Time: `O(n)`, space: `O(n)`.
 
+## Subarray Sum Equals K
+
+Prefix sum + hashmap of previous prefix counts.
+
+For current prefix sum `prefix`, a previous prefix `needed` forms a subarray ending here with sum `k` when:
+
+```text
+prefix - needed = k
+needed = prefix - k
+```
+
+Keep:
+
+```text
+pref_count[p] = how many times prefix sum p appeared before
+```
+
+Initialize `pref_count[0] = 1` so subarrays starting at index `0` are counted.
+
+Works with negative numbers, unlike sliding window.
+
+Time: `O(n)`. Space: `O(n)`.
+
 ## Group Anagrams
 
 Use character-count array as the group key:
