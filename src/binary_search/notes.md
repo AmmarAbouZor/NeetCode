@@ -68,6 +68,25 @@ If we need `<= k` parts, `limit` is feasible, so try smaller. Otherwise, `limit`
 
 Time: `O(n * log(sum(nums) - max(nums)))`. Space: `O(1)`.
 
+## Capacity To Ship Packages Within D Days
+
+Binary search on the minimum capacity.
+
+Search range:
+
+```text
+left = max(weights)   // every package must fit by itself
+right = sum(weights)  // ship everything in one day
+```
+
+For a candidate `capacity`, greedily simulate loading packages in order. Start a new day when adding the next package would exceed `capacity`.
+
+Greedy is valid because package order is fixed: each day should carry as many packages as possible before starting the next day.
+
+If shipping finishes within `days`, capacity is valid, so try smaller. Otherwise, capacity is too small.
+
+Time: `O(n * log(sum(weights) - max(weights)))`. Space: `O(1)`.
+
 ## Koko Eating Bananas
 
 Search speed `k` from `1..=max(piles)`.

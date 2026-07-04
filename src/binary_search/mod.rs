@@ -1,4 +1,5 @@
 pub mod binary_s;
+pub mod capacity_ship_package;
 pub mod koko_banana;
 pub mod median_two_arrays;
 pub mod min_rotated;
