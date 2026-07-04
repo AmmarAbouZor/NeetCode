@@ -100,3 +100,34 @@ In Rust, use `Reverse<i32>` because `BinaryHeap` is a max-heap by default.
 If the earliest room is not free, no room is free, so allocate another room.
 
 Time: `O(n log n)`. Space: `O(m)`, where `m` is the number of rooms.
+
+## Meeting Rooms III
+
+Two-heap simulation.
+
+Keep:
+
+```text
+available = free room ids, ordered by smallest room id
+busy = occupied rooms as (free_time, room_id), ordered by earliest free time
+```
+
+Process meetings sorted by start time.
+
+For each meeting:
+
+1. release every room with `free_time <= start`
+2. if a room is available, use the smallest room id
+3. otherwise delay the meeting until the earliest busy room becomes free
+
+When delaying, keep the original duration:
+
+```text
+new_end = earliest_free_time + (end - start)
+```
+
+The busy heap stores `(free_time, room_id)`, so ties use the smaller room id automatically.
+
+For the final answer, scan counts and update only on a strictly larger count. This keeps the smallest room id on ties.
+
+Time: `O(m log m + m log n)`, where `m = meetings.len()` and `n = rooms`. Space: `O(n)`.
