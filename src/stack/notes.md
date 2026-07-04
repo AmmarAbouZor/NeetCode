@@ -46,6 +46,40 @@ left / right
 
 Time: `O(n)`, space: `O(n)`.
 
+## Decode String
+
+Stack of saved contexts for nested strings.
+
+Keep:
+
+```text
+curr_txt = string being built at current nesting level
+curr_num = repeat count being parsed before '['
+```
+
+When seeing `[`:
+
+```text
+push (curr_txt, curr_num)
+reset current context for the inner string
+```
+
+When seeing `]`:
+
+```text
+pop previous context
+append current string count times to previous string
+make the combined string current again
+```
+
+Digits can have multiple characters:
+
+```text
+curr_num = curr_num * 10 + digit
+```
+
+Time: `O(output length)`. Space: `O(output length + nesting depth)`.
+
 ## Daily Temperatures
 
 Monotonic decreasing stack of unresolved indices.
