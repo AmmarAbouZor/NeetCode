@@ -1,9 +1,18 @@
-// O(logN) for binary search. O(1) Space
-
-// Solution is binary search but it needs time to think about the conditions in which
-// The array is rotated.
-
-// Current solution is different than one in NeetCode as it's easier to reason about.
+// Binary search in a rotated sorted array with distinct values.
+//
+// At each step, one side of the array must be sorted:
+// - if nums[left] <= nums[mid], the left half is sorted
+// - otherwise, the right half is sorted
+//
+// Once we know the sorted half, check whether the target lies inside it.
+// If it does, search that half; otherwise, search the other half.
+//
+// This is the version without duplicates. With duplicates, nums[left] == nums[mid]
+// can hide which half is sorted, so Search in Rotated Sorted Array II needs an
+// extra shrink step.
+//
+// Time: O(log n)
+// Space: O(1)
 pub fn search(nums: Vec<i32>, target: i32) -> i32 {
     let mut left = 0_i32;
     let mut right = nums.len() as i32 - 1;

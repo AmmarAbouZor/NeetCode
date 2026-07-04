@@ -128,6 +128,28 @@ if nums[left] <= nums[mid] {
 
 Then check whether target lies inside that sorted half. Assumes distinct values unless stated otherwise.
 
+Time: `O(log n)`. Space: `O(1)`.
+
+## Search in Rotated Sorted Array II
+
+Same sorted-half logic, but duplicates add an ambiguous case.
+
+If:
+
+```text
+nums[left] == nums[mid]
+```
+
+then duplicates hide which half is sorted. Safely shrink the search window:
+
+```rust
+left += 1;
+```
+
+This keeps correctness but can degrade to linear time when many duplicates exist.
+
+Time: `O(log n)` average, `O(n)` worst case. Space: `O(1)`.
+
 ## Minimum in Rotated Sorted Array
 
 Compare `mid` with `right`:
