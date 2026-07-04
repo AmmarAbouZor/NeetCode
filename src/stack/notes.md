@@ -112,6 +112,26 @@ Add a sentinel `0` height at the end to flush the stack.
 
 Each index is pushed and popped at most once. Time: `O(n)`, space: `O(n)`.
 
+## Maximal Rectangle
+
+Reduce each row to Largest Rectangle in Histogram.
+
+Keep column heights:
+
+```text
+heights[c] = number of consecutive '1's ending at the current row in column c
+```
+
+For each row:
+
+1. update `heights`
+2. run largest-rectangle-in-histogram on `heights`
+3. update max area
+
+A rectangle of all `1`s ending at the current row becomes a rectangle in that row's histogram.
+
+Time: `O(rows * cols)`. Space: `O(cols)` for heights and stack.
+
 ## Car Fleet
 
 **Note**: Solution doesn't use a stack as we only need to track the latest fleet.

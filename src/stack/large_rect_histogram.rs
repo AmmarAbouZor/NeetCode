@@ -18,6 +18,9 @@ pub fn largest_rectangle_area_idiomatic(heights: Vec<i32>) -> i32 {
     use std::iter;
     for (idx, cur_h) in heights.iter().copied().chain(iter::once(0)).enumerate() {
         while let Some(top) = stack.pop_if(|t| cur_h < heights[*t]) {
+            // `idx` is the first shorter bar on the right.
+            // `left` is the nearest shorter bar on the left.
+            // The rectangle can only use bars between them: left + 1..idx - 1.
             let width = if let Some(&left) = stack.last() {
                 idx - left - 1
             } else {
