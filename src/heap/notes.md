@@ -133,6 +133,41 @@ The heap has at most `3` entries: `a`, `b`, and `c`.
 
 Time: `O(n log 3)`, effectively `O(n)`, where `n = a + b + c`. Space: `O(n)` including output, `O(1)` extra space.
 
+## Car Pooling
+
+Difference array / sweep line is the best fit.
+
+Each trip creates two events:
+
+```text
+start: +passengers
+end: -passengers
+```
+
+A prefix sum over the events gives the current passenger count. If it ever exceeds `capacity`, return false.
+
+If locations are bounded, use a fixed timeline array:
+
+```text
+timeline[start] += passengers
+timeline[end] -= passengers
+```
+
+Time: `O(n + R)`, where `R` is the location range. Space: `O(R)`.
+
+If locations are not bounded, sort the events and sweep them:
+
+```text
+(start, +passengers)
+(end, -passengers)
+```
+
+At the same location, dropoffs must happen before pickups. Sorting `(location, delta)` handles this because dropoffs are negative.
+
+Time: `O(n log n)`. Space: `O(n)`.
+
+Heap version also works: process trips by start, keep active trips in a min-heap by end location, and remove ended trips before adding the next one. This is useful when active intervals need to expire dynamically, but it is more machinery than the sweep solution.
+
 ## Minimum Interval to Include Each Query
 
 Sweep queries from smallest to largest.

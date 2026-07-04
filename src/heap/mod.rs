@@ -1,3 +1,4 @@
+pub mod car_pooling;
 pub mod k_close_origin;
 pub mod kth_large_array;
 pub mod kth_large_stream;
