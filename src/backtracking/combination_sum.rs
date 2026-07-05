@@ -20,10 +20,11 @@
 // Passing j into the recursive call allows reusing the same candidate while
 // keeping combinations in non-decreasing index order, avoiding duplicate permutations.
 
-// Time: O(2^(T/m)) as a loose upper bound, plus output cloning.
+// Let d = target / min_candidate be the maximum combination length.
+// Time is exponential in d, plus output cloning.
 // Sorting adds O(n log n), usually dominated by the search.
-// Extra space: O(T/m), excluding output.
-// Output space: O(k * T/m).
+// Extra space: O(d), excluding output.
+// Output space: O(k * d), where k is the number of valid combinations.
 
 pub fn combination_sum_optimized(nums: Vec<i32>, target: i32) -> Vec<Vec<i32>> {
     let mut nums = nums;
@@ -66,11 +67,11 @@ pub fn dfs_opt(
     }
 }
 
-// Combination DFS
-// Time: O(2^(T/m)) as a loose bound for the search tree, where T is target
-// and m is the smallest candidate. Cloning results adds output cost.
-// Extra space: O(T/m) for recursion stack and current combination, excluding output.
-// Output space: O(k * T/m), where k is the number of valid combinations.
+// Combination DFS.
+// Let d = target / min_candidate be the maximum combination length.
+// Time is exponential in d, plus output cloning.
+// Extra space: O(d) for recursion stack and current combination, excluding output.
+// Output space: O(k * d), where k is the number of valid combinations.
 
 // Combination with DFS to avoid dulicate permutations:
 // - One branch choosing to keep including an item
