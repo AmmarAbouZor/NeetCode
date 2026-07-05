@@ -36,7 +36,7 @@ impl Codec {
         let mut output = String::new();
         ser_dfs(node.as_ref(), &mut output);
 
-        if !output.is_empty() {
+        if output.ends_with(',') {
             output.pop();
         }
 
