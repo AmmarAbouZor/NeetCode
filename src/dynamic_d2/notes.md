@@ -313,7 +313,7 @@ Time: `O(rows * cols)`. Space: `O(rows * cols)` for memoization plus recursion s
 
 ## Burst Balloons
 
-Interval DP.
+Top-down interval DP with memoization.
 
 Key mental model: choose which balloon is burst last inside an interval, not which balloon is burst first.
 
@@ -326,10 +326,12 @@ vals = [1] + nums + [1]
 State:
 
 ```text
-dp[left][right] = max coins from bursting all balloons strictly between left and right
+dfs(left, right) = max coins from bursting all balloons strictly between left and right
 ```
 
-`left` and `right` are fixed boundaries for the subproblem. If `mid` is the last balloon burst inside `(left, right)`, then its neighbors are known:
+`left` and `right` are fixed boundary balloons and are not burst in this subproblem.
+
+If `mid` is the last balloon burst inside `(left, right)`, then every other balloon in that interval is already gone. So `mid`'s final neighbors are exactly `left` and `right`:
 
 ```text
 vals[left] * vals[mid] * vals[right]
@@ -338,14 +340,24 @@ vals[left] * vals[mid] * vals[right]
 Transition:
 
 ```text
-dp[left][right] = max(
-    dp[left][mid] + vals[left] * vals[mid] * vals[right] + dp[mid][right]
+dfs(left, right) = max(
+    dfs(left, mid) + vals[left] * vals[mid] * vals[right] + dfs(mid, right)
 )
 ```
 
-Fill smaller intervals first using `gap = right - left`. Start at `gap = 2` because there must be at least one balloon between the boundaries.
+Base case:
 
-Time: `O(n^3)`, for `O(n^2)` intervals and `O(n)` choices per interval. Space: `O(n^2)`.
+```text
+right == left + 1 => 0
+```
+
+There are no balloons strictly between the boundaries.
+
+Memoize by `(left, right)`. There are `O(n^2)` intervals, and each interval tries `O(n)` possible last balloons.
+
+Bottom-up version uses the same state as `dp[left][right]` and fills smaller intervals first by increasing gap.
+
+Time: `O(n^3)`. Space: `O(n^2)`.
 
 ## Best Time to Buy/Sell Stock With Cooldown
 

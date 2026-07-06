@@ -1,4 +1,64 @@
-// Interval DP
+// Top-down interval DP with memoization.
+//
+// Key mental model:
+// Do not choose which balloon to burst first.
+// Choose which balloon is burst last inside an interval.
+//
+// Add virtual balloons with value 1 at both ends:
+//
+// vals = [1] + nums + [1]
+//
+// dfs(left, right) = max coins we can get by bursting all balloons strictly
+// between `left` and `right`.
+//
+// `left` and `right` are boundary balloons and are not burst in this subproblem.
+// If `mid` is burst last inside (left, right), then every other balloon in the
+// interval is already gone, so `mid`'s final neighbors are exactly left and right.
+//
+// coins = dfs(left, mid) + vals[left] * vals[mid] * vals[right] + dfs(mid, right)
+//
+// Try every possible `mid` as the last balloon and memoize the best result.
+//
+// Time: O(n^3): O(n^2) intervals, and each interval tries O(n) choices.
+// Space: O(n^2) for memo plus recursion stack.
+pub fn max_coins_memo(nums: Vec<i32>) -> i32 {
+    let mut vals = Vec::with_capacity(nums.len() + 2);
+    vals.push(1);
+    vals.extend(nums);
+    vals.push(1);
+
+    let n = vals.len();
+    let mut memo = vec![vec![-1; n]; n];
+
+    dfs(0, n - 1, &vals, &mut memo)
+}
+
+fn dfs(left: usize, right: usize, vals: &[i32], memo: &mut [Vec<i32>]) -> i32 {
+    // No balloon strictly between the boundaries.
+    if right == left + 1 {
+        return 0;
+    }
+
+    if memo[left][right] != -1 {
+        return memo[left][right];
+    }
+
+    let mut best = 0;
+
+    // `mid` is the last balloon to burst in this interval.
+    for mid in left + 1..right {
+        let coins = dfs(left, mid, vals, memo)
+            + vals[left] * vals[mid] * vals[right]
+            + dfs(mid, right, vals, memo);
+
+        best = best.max(coins);
+    }
+
+    memo[left][right] = best;
+    best
+}
+
+// Bottom-up interval DP.
 //
 // Key mental model:
 // Do not choose which balloon to burst first.
