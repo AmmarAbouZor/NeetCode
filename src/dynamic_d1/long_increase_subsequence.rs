@@ -14,17 +14,15 @@
 
 pub fn length_of_lis_suffix(nums: Vec<i32>) -> i32 {
     let n = nums.len();
-    let mut lis = vec![0; n];
+    // Base: Each element can be it's own subsequence.
+    let mut lis = vec![1; n];
 
     for i in 0..n {
-        let mut best = 1;
         for j in 0..i {
             if nums[j] < nums[i] {
-                best = best.max(lis[j] + 1);
+                lis[i] = lis[i].max(lis[j] + 1);
             }
         }
-
-        lis[i] = best;
     }
 
     lis.into_iter().max().unwrap_or_default()
